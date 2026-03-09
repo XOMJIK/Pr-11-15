@@ -24,12 +24,6 @@
   margin-bottom: 8px;
 }
 
-.brand-icon {
-  width: 64px;
-  height: 64px;
-  object-fit: contain;
-}
-
 .auth-title {
   font-family: var(--font-display);
   font-size: 32px;
