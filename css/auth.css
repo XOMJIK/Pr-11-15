@@ -1,7 +1,3 @@
-/* ════════════════════════════
-   AUTH — логін та реєстрація
-════════════════════════════ */
-
 .auth-page {
   min-height: calc(100vh - 130px);
   display: flex;
@@ -26,6 +22,12 @@
   font-weight: 800;
   text-align: center;
   margin-bottom: 8px;
+}
+
+.brand-icon {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
 }
 
 .auth-title {
