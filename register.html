@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="uk">
 <head>
-  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Реєстрація — GEAR.CO</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -79,7 +77,6 @@
           <label class="form-label" for="password">Пароль</label>
           <input class="form-input" type="password" id="password" placeholder="Мінімум 8 символів" oninput="checkStrength()">
           <span class="form-error" id="passErr">Пароль повинен містити мінімум 8 символів</span>
-          <!-- Індикатор сили пароля -->
           <div id="strengthBar" style="margin-top:6px;display:none">
             <div style="height:4px;border-radius:2px;background:var(--gray-border);overflow:hidden">
               <div id="strengthFill" style="height:100%;width:0;transition:width 0.3s,background 0.3s;border-radius:2px"></div>
@@ -159,7 +156,6 @@
     }
 
     function register() {
-      // Скидаємо всі помилки
       ['firstName','lastName','email','phone','password','confirmPassword'].forEach(id => {
         document.getElementById(id).classList.remove('error');
       });

@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="uk">
 <head>
-  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Вхід — GEAR.CO</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -100,13 +98,11 @@
       const passErr  = document.getElementById('passErr');
       let valid = true;
 
-      // Скидаємо помилки
       email.classList.remove('error');
       password.classList.remove('error');
       emailErr.classList.remove('show');
       passErr.classList.remove('show');
 
-      // Валідація email
       const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRe.test(email.value.trim())) {
         email.classList.add('error');
@@ -114,7 +110,6 @@
         valid = false;
       }
 
-      // Валідація пароля
       if (password.value.length < 6) {
         password.classList.add('error');
         passErr.classList.add('show');
@@ -123,7 +118,6 @@
 
       if (!valid) return;
 
-      // Симуляція входу
       document.getElementById('successMsg').classList.add('show');
       setTimeout(() => { window.location.href = 'index.html'; }, 1500);
     }

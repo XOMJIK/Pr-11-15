@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="uk">
 <head>
-  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Каталог — GEAR.CO</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,7 +45,6 @@
 
   <div class="category-layout">
 
-    <!-- ── ФІЛЬТРИ ── -->
     <aside class="filters-panel">
       <div class="filters-title">
         Фільтри
@@ -91,7 +88,6 @@
       </div>
     </aside>
 
-    <!-- ── ТОВАРИ ── -->
     <div>
       <div class="catalog-header">
         <div>
@@ -108,10 +104,8 @@
         </div>
       </div>
 
-      <!-- Активні теги -->
       <div class="active-filters" id="activeTags"></div>
 
-      <!-- Сітка товарів -->
       <div class="catalog-grid" id="catalogGrid">
 
         <a href="product.html" class="product-card"
@@ -256,7 +250,6 @@
 
       </div>
 
-      <!-- Немає результатів -->
       <div id="noResults" style="display:none;text-align:center;padding:60px 20px">
         <div style="font-size:64px;margin-bottom:16px">🔍</div>
         <h3 style="font-family:var(--font-display);font-size:28px;text-transform:uppercase;margin-bottom:8px">Нічого не знайдено</h3>
@@ -264,7 +257,6 @@
         <button class="btn-outline" style="margin-top:20px" onclick="resetFilters()">Скинути фільтри</button>
       </div>
 
-      <!-- Пагінація -->
       <div class="pagination" id="pagination">
         <button class="page-btn prev">← Назад</button>
         <button class="page-btn active">1</button>
@@ -302,7 +294,6 @@
   </footer>
 
   <script>
-    // ── ФІЛЬТРАЦІЯ ──
     function filterProducts() {
       const cards       = document.querySelectorAll('#catalogGrid .product-card');
       const searchVal   = document.getElementById('searchInput').value.toLowerCase();
@@ -379,7 +370,6 @@
       document.getElementById('priceLabel').textContent = '$' + document.getElementById('priceRange').value;
     }
 
-    // ── СОРТУВАННЯ ──
     function sortProducts() {
       const grid  = document.getElementById('catalogGrid');
       const cards = [...grid.querySelectorAll('.product-card')];
@@ -395,7 +385,6 @@
       cards.forEach(c => grid.appendChild(c));
     }
 
-    // ── URL параметри (пошук з головної) ──
     window.addEventListener('DOMContentLoaded', () => {
       const params = new URLSearchParams(window.location.search);
       const q = params.get('search');

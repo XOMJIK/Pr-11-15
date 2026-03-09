@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-<html lang="uk">
 <head>
-  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Кошик — GEAR.CO</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,7 +45,6 @@
 
   <div class="cart-layout">
 
-    <!-- Список товарів -->
     <div>
       <h2 class="cart-items-title">Ваш кошик</h2>
 
@@ -93,7 +90,6 @@
 
       </div>
 
-      <!-- Порожній кошик (прихований) -->
       <div class="cart-empty" id="cartEmpty" style="display:none">
         <div class="cart-empty-icon">🛒</div>
         <h2>Кошик порожній</h2>
@@ -102,7 +98,6 @@
       </div>
     </div>
 
-    <!-- Підсумок -->
     <div class="order-summary">
       <div class="summary-title">Підсумок замовлення</div>
 
@@ -186,7 +181,6 @@
       document.getElementById('total').textContent     = total.toFixed(2);
       document.getElementById('cartCount').textContent = items.length;
 
-      // Якщо кошик порожній
       if (items.length === 0) {
         document.getElementById('cartEmpty').style.display = 'block';
         document.querySelector('.order-summary').style.display = 'none';
