@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Вхід — GEAR.CO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+  <div class="announcement">
+    🖥️ Зареєструйтесь і отримайте знижку 20% на перше замовлення. <u>Зареєструватись</u>
+    <span class="close" onclick="this.parentElement.style.display='none'">✕</span>
+  </div>
+
+  <header>
+    <a href="index.html" class="logo">GEAR.CO</a>
+    <nav>
+      <a href="index.html">Магазин ▾</a>
+      <a href="new-arrivals.html">Новинки</a>
+      <a href="brands.html">Бренди</a>
+      <a href="category.html">Розпродаж</a>
+    </nav>
+    <div class="search-bar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" placeholder="Пошук товарів..." onkeydown="if(event.key==='Enter'&&this.value) window.location.href='category.html?search='+encodeURIComponent(this.value)">
+    </div>
+    <div class="header-icons">
+      <a href="cart.html" class="cart-icon-wrap">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="cart-count">2</span>
+      </a>
+      <a href="login.html">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="auth-logo">GEAR.CO</div>
+      <div class="auth-title">Вхід</div>
+      <p class="auth-sub">Раді бачити тебе знову! Введи свої дані.</p>
+
+      <div class="success-msg" id="successMsg">✓ Вхід успішний! Перенаправлення...</div>
+
+      <div class="auth-form">
+
+        <div class="form-group">
+          <label class="form-label" for="email">Електронна пошта</label>
+          <input class="form-input" type="email" id="email" placeholder="example@email.com">
+          <span class="form-error" id="emailErr">Введіть правильну електронну пошту</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="password">Пароль</label>
+          <input class="form-input" type="password" id="password" placeholder="Введіть пароль" onkeydown="if(event.key==='Enter') login()">
+          <span class="form-error" id="passErr">Пароль повинен містити мінімум 6 символів</span>
+        </div>
+
+        <div class="form-row">
+          <label><input type="checkbox" id="remember"> Запам'ятати мене</label>
+          <a href="#">Забули пароль?</a>
+        </div>
+
+        <button class="btn-auth" onclick="login()">Увійти</button>
+
+        <div class="auth-divider">або</div>
+
+        <button class="btn-social" onclick="socialLogin('Google')">
+          <span>🌐</span> Увійти через Google
+        </button>
+        <button class="btn-social" onclick="socialLogin('Facebook')">
+          <span>📘</span> Увійти через Facebook
+        </button>
+
+      </div>
+
+      <div class="auth-footer">
+        Немає акаунту? <a href="register.html">Зареєструватись</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-bottom" style="border-top:none;justify-content:center">
+      <span>Gear.co © 2025. Усі права захищені</span>
+    </div>
+  </footer>
+
+  <script>
+    function login() {
+      const email    = document.getElementById('email');
+      const password = document.getElementById('password');
+      const emailErr = document.getElementById('emailErr');
+      const passErr  = document.getElementById('passErr');
+      let valid = true;
+
+      // Скидаємо помилки
+      email.classList.remove('error');
+      password.classList.remove('error');
+      emailErr.classList.remove('show');
+      passErr.classList.remove('show');
+
+      // Валідація email
+      const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRe.test(email.value.trim())) {
+        email.classList.add('error');
+        emailErr.classList.add('show');
+        valid = false;
+      }
+
+      // Валідація пароля
+      if (password.value.length < 6) {
+        password.classList.add('error');
+        passErr.classList.add('show');
+        valid = false;
+      }
+
+      if (!valid) return;
+
+      // Симуляція входу
+      document.getElementById('successMsg').classList.add('show');
+      setTimeout(() => { window.location.href = 'index.html'; }, 1500);
+    }
+
+    function socialLogin(provider) {
+      alert(`Вхід через ${provider} — функціонал в розробці 🚧`);
+    }
+  </script>
+</body>
+</html>

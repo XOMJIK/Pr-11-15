@@ -1,0 +1,92 @@
+/* ════════════════════════════
+   BASE — змінні, reset, шрифти
+════════════════════════════ */
+
+:root {
+  --black:       #000000;
+  --white:       #ffffff;
+  --gray-light:  #F0F0F0;
+  --gray-mid:    #666666;
+  --gray-border: #E0E0E0;
+  --red:         #FF3333;
+  --star:        #FFC633;
+  --green:       #01AB31;
+
+  --font-display: 'Barlow Condensed', sans-serif;
+  --font-body:    'Barlow', sans-serif;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--black);
+  background: var(--white);
+  overflow-x: hidden;
+}
+
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+img { display: block; max-width: 100%; }
+button { cursor: pointer; font-family: var(--font-body); }
+
+/* ── КНОПКИ (спільні) ── */
+.btn-primary {
+  display: inline-block;
+  background: var(--black);
+  color: var(--white);
+  padding: 16px 54px;
+  border-radius: 62px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  font-family: var(--font-body);
+  transition: background 0.2s, transform 0.15s;
+  cursor: pointer;
+}
+.btn-primary:hover { background: #222; transform: scale(1.03); }
+
+.btn-outline {
+  display: inline-block;
+  border: 1px solid var(--gray-border);
+  border-radius: 62px;
+  padding: 14px 48px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  background: transparent;
+  font-family: var(--font-body);
+  transition: all 0.2s;
+}
+.btn-outline:hover { background: var(--black); color: var(--white); border-color: var(--black); }
+
+/* ── ЗІРКИ / РЕЙТИНГ ── */
+.stars        { color: var(--star); font-size: 14px; }
+.rating-num   { font-size: 13px; color: var(--gray-mid); }
+
+/* ── ЦІНА ── */
+.price        { font-family: var(--font-display); font-size: 22px; font-weight: 700; }
+.price-old    { font-family: var(--font-display); font-size: 18px; color: #999; text-decoration: line-through; }
+.badge-sale   { background: #FFEDED; color: var(--red); font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 62px; }
+
+/* ── РОЗДІЛЮВАЧ ── */
+.divider { border: none; border-top: 1px solid var(--gray-border); margin: 0 80px; }
+
+/* ── ХЛІБНІ КРИХТИ ── */
+.breadcrumb {
+  padding: 16px 80px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--gray-mid);
+  border-bottom: 1px solid var(--gray-border);
+}
+.breadcrumb a:hover { color: var(--black); text-decoration: underline; }
+.breadcrumb span { color: var(--black); font-weight: 500; }

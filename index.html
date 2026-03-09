@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GEAR.CO — Преміум периферія для ПК</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/mobile.css">
+</head>
+<body>
+
+  <!-- Оголошення -->
+  <div class="announcement">
+    🖥️ Зареєструйтесь і отримайте знижку 20% на перше замовлення. <u>Зареєструватись</u>
+    <span class="close" onclick="this.parentElement.style.display='none'">✕</span>
+  </div>
+
+  <!-- Шапка -->
+  <header>
+    <div class="logo">GEAR.CO</div>
+    <nav>
+      <a href="index.html" class="active">Магазин ▾</a>
+      <a href="new-arrivals.html">Новинки</a>
+      <a href="brands.html">Бренди</a>
+      <a href="category.html">Розпродаж</a>
+    </nav>
+    <div class="search-bar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="searchInput" placeholder="Пошук товарів..." onkeydown="if(event.key==='Enter'&&this.value) window.location.href='category.html?search='+encodeURIComponent(this.value)">
+    </div>
+    <div class="header-icons">
+      <a href="cart.html" class="cart-icon-wrap">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="cart-count">2</span>
+      </a>
+      <a href="login.html">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- Головний банер -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Зберіть<br>Ідеальний<br>Сетап</h1>
+      <p>Переглядайте нашу добірку преміум периферії — від ультраточних ігрових мишок до моніторів з високою частотою оновлення. Ваш ідеальний стіл починається тут.</p>
+      <a href="category.html"><button class="btn-primary">Купити зараз</button></a>
+      <div class="hero-stats">
+        <div class="hero-stat"><strong>150+</strong><span>Топових брендів</span></div>
+        <div class="hero-stat"><strong>5 000+</strong><span>Товарів у наявності</span></div>
+        <div class="hero-stat"><strong>80 000+</strong><span>Задоволених клієнтів</span></div>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="images/hero.png" alt="Ігровий сетап" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+      <span class="hero-emoji" style="display:none">🖥️</span>
+    </div>
+  </section>
+
+  <!-- Бренди -->
+  <div class="brands">
+    <span class="brand-name">Logitech</span>
+    <span class="brand-name">Razer</span>
+    <span class="brand-name">SteelSeries</span>
+    <span class="brand-name">Corsair</span>
+    <span class="brand-name">HyperX</span>
+  </div>
+
+  <!-- Новинки -->
+  <section class="section">
+    <h2 class="section-title">Новинки</h2>
+    <div class="products-grid">
+
+      <a href="product.html" class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/mouse1.png" alt="Razer DeathAdder V3" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+          <div class="product-placeholder" style="display:none">🖱️</div>
+        </div>
+        <div class="product-name">Razer DeathAdder V3</div>
+        <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-num">4.9/5</span></div>
+        <div class="product-price"><span class="price">$89</span></div>
+      </a>
+
+      <a href="product.html" class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/keyboard1.png" alt="Logitech G Pro X TKL" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+          <div class="product-placeholder" style="display:none">⌨️</div>
+        </div>
+        <div class="product-name">Logitech G Pro X TKL</div>
+        <div class="product-rating"><span class="stars">★★★★☆</span><span class="rating-num">4.7/5</span></div>
+        <div class="product-price"><span class="price">$129</span><span class="price-old">$159</span><span class="badge-sale">-19%</span></div>
+      </a>
+
+      <a href="product.html" class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/headset1.png" alt="HyperX Cloud III S Wireless" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+          <div class="product-placeholder" style="display:none">🎧</div>
+        </div>
+        <div class="product-name">HyperX Cloud III S Wireless</div>
+        <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-num">4.8/5</span></div>
+        <div class="product-price"><span class="price">$149</span></div>
+      </a>
+
+      <a href="product.html" class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/monitor1.png" alt='Samsung Odyssey G5 27"' onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+          <div class="product-placeholder" style="display:none">🖥️</div>
+        </div>
+        <div class="product-name">Samsung Odyssey G5 27"</div>
+        <div class="product-rating"><span class="stars">★★★★☆</span><span class="rating-num">4.6/5</span></div>
+        <div class="product-price"><span class="price">$299</span><span class="price-old">$379</span><span class="badge-sale">-21%</span></div>
+      </a>
+
+    </div>
+    <div class="section-footer"><a href="category.html"><button class="btn-outline">Переглянути всі</button></a></div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- Топ продажів -->
+  <section class="section">
+    <h2 class="section-title">Топ продажів</h2>
+    <div class="products-grid">
+
+      <a href="product.html" class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/mouse2.png" alt="Logitech G502 X Plus" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+          <div class="product-placeholder" style="display:none">🖱️</div>
+        </div>
+        <div class="product-name">Logitech G502 X Plus</div>
+        <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-num">5.0/5</span></div>
+        <div class="product-price"><span class="price">$159</span><span class="price-old">$199</span><span class="badge-sale">-20%</span></div>
+      </a>
+
+      <a href="product.html" class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/keyboard2.png" alt="Corsair K70 RGB Pro" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+          <div class="product-placeholder" style="display:none">⌨️</div>
+        </div>
+        <div class="product-name">Corsair K70 RGB Pro</div>
+        <div class="product-rating"><span class="stars">★★★★☆</span><span class="rating-num">4.5/5</span></div>
+        <div class="product-price"><span class="price">$139</span></div>
+      </a>
+
+      <a href="product.html" class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/mousepad1.png" alt="SteelSeries QcK XXL" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+          <div class="product-placeholder" style="display:none">🖱️</div>
+        </div>
+        <div class="product-name">SteelSeries QcK XXL</div>
+        <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-num">4.9/5</span></div>
+        <div class="product-price"><span class="price">$49</span><span class="price-old">$59</span><span class="badge-sale">-17%</span></div>
+      </a>
+
+      <a href="product.html" class="product-card">
+        <div class="product-img-wrap">
+          <img src="images/headset2.png" alt="SteelSeries Arctis Nova 7" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+          <div class="product-placeholder" style="display:none">🎧</div>
+        </div>
+        <div class="product-name">SteelSeries Arctis Nova 7</div>
+        <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-num">4.8/5</span></div>
+        <div class="product-price"><span class="price">$149</span><span class="price-old">$179</span><span class="badge-sale">-17%</span></div>
+      </a>
+
+    </div>
+    <div class="section-footer"><a href="category.html"><button class="btn-outline">Переглянути всі</button></a></div>
+  </section>
+
+  <!-- Категорії -->
+  <section class="section" style="padding-top:0">
+    <div class="cat-section">
+      <h2 class="section-title">Переглянути за категорією</h2>
+      <div class="style-grid">
+        <a href="category.html?cat=Миші" class="style-card bg-mouse">
+          <img src="images/cat-mouse.png" alt="Миші" class="style-card-img" onerror="this.style.display='none'">
+          <span class="style-card-emoji">🖱️</span>
+          <span class="style-card-label">Миші</span>
+        </a>
+        <a href="category.html?cat=Клавіатури" class="style-card wide bg-keyboard">
+          <img src="images/cat-keyboard.png" alt="Клавіатури" class="style-card-img" onerror="this.style.display='none'">
+          <span class="style-card-emoji">⌨️</span>
+          <span class="style-card-label">Клавіатури</span>
+        </a>
+        <a href="category.html?cat=Навушники" class="style-card wide bg-headset">
+          <img src="images/cat-headset.png" alt="Навушники" class="style-card-img" onerror="this.style.display='none'">
+          <span class="style-card-emoji">🎧</span>
+          <span class="style-card-label">Навушники</span>
+        </a>
+        <a href="category.html?cat=Монітори" class="style-card bg-monitor">
+          <img src="images/cat-monitor.png" alt="Монітори" class="style-card-img" onerror="this.style.display='none'">
+          <span class="style-card-emoji">🖥️</span>
+          <span class="style-card-label">Монітори</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Відгуки -->
+  <section class="section">
+    <h2 class="section-title">Наші задоволені клієнти</h2>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-name">Дмитро К. <span class="verified">✓</span></div>
+        <p class="testimonial-text">"Замовив мишку Razer і килимок — обидва прийшли наступного дня. Якість неймовірна. Моя точність у грі помітно покращилась. Gear.co — тепер мій основний магазин!"</p>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-name">Олена М. <span class="verified">✓</span></div>
+        <p class="testimonial-text">"Нарешті знайшла магазин з нормальним вибором TKL клавіатур. Взяла Logitech G Pro X за чудовою ціною з швидкою доставкою. Пакування ідеальне, жодних пошкоджень."</p>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <div class="testimonial-name">Іван С. <span class="verified">✓</span></div>
+        <p class="testimonial-text">"Купив монітор Samsung 27" під час розпродажу — заощадив майже $80. Якість картинки приголомшує. На Gear.co була найкраща ціна, а доставка надшвидка."</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Розсилка -->
+  <div class="newsletter">
+    <h2>Будьте в курсі наших найкращих пропозицій</h2>
+    <div class="newsletter-form">
+      <input class="newsletter-input" type="email" placeholder="Введіть вашу електронну пошту">
+      <button class="btn-white">Підписатись на розсилку</button>
+    </div>
+  </div>
+
+  <!-- Підвал -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">GEAR.CO</div>
+        <p>Преміум периферія для геймерів та професіоналів. Ми продаємо лише найкраще обладнання для вашого сетапу.</p>
+        <div class="footer-social">
+          <div class="social-icon">𝕏</div>
+          <div class="social-icon">f</div>
+          <div class="social-icon">in</div>
+          <div class="social-icon">▶</div>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Компанія</h4><ul><li><a href="#">Про нас</a></li><li><a href="#">Блог</a></li><li><a href="#">Вакансії</a></li><li><a href="#">Партнерство</a></li></ul></div>
+      <div class="footer-col"><h4>Допомога</h4><ul><li><a href="#">Підтримка</a></li><li><a href="#">Доставка</a></li><li><a href="#">Умови</a></li><li><a href="#">Конфіденційність</a></li></ul></div>
+      <div class="footer-col"><h4>FAQ</h4><ul><li><a href="#">Акаунт</a></li><li><a href="#">Замовлення</a></li><li><a href="#">Повернення</a></li><li><a href="#">Оплата</a></li></ul></div>
+      <div class="footer-col"><h4>Категорії</h4><ul><li><a href="category.html">Миші</a></li><li><a href="category.html">Клавіатури</a></li><li><a href="category.html">Навушники</a></li><li><a href="category.html">Монітори</a></li><li><a href="category.html">Килимки</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>Gear.co © 2025. Усі права захищені</span>
+      <div class="payment-icons">
+        <span class="pay-badge">VISA</span><span class="pay-badge">Mastercard</span><span class="pay-badge">PayPal</span><span class="pay-badge">Apple Pay</span><span class="pay-badge">G Pay</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

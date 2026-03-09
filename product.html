@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Razer DeathAdder V3 — GEAR.CO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/product.css">
+  <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/mobile.css">
+</head>
+<body>
+
+  <!-- Оголошення -->
+  <div class="announcement">
+    🖥️ Зареєструйтесь і отримайте знижку 20% на перше замовлення. <u>Зареєструватись</u>
+    <span class="close" onclick="this.parentElement.style.display='none'">✕</span>
+  </div>
+
+  <!-- Шапка -->
+  <header>
+    <div class="logo">GEAR.CO</div>
+    <nav>
+      <a href="index.html">Магазин ▾</a>
+      <a href="category.html">Розпродаж</a>
+      <a href="category.html">Новинки</a>
+      <a href="category.html">Бренди</a>
+    </nav>
+    <div class="search-bar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" placeholder="Пошук товарів...">
+    </div>
+    <div class="header-icons">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <a href="cart.html" class="cart-icon-wrap">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="cart-count">2</span>
+      </a>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+  </header>
+
+  <!-- Хлібні крихти -->
+  <div class="breadcrumb">
+    <a href="index.html">Головна</a> › <a href="category.html">Миші</a> › <span>Razer DeathAdder V3</span>
+  </div>
+
+  <!-- Товар -->
+  <div class="product-layout">
+
+    <!-- Галерея -->
+    <div class="product-gallery">
+      <div class="gallery-thumbs">
+        <div class="gallery-thumb active">
+          <img src="images/mouse1.png" alt="" onerror="this.style.display='none'; this.parentElement.textContent='🖱️'">
+        </div>
+        <div class="gallery-thumb">
+          <img src="images/mouse1-2.png" alt="" onerror="this.style.display='none'; this.parentElement.textContent='🖱️'">
+        </div>
+        <div class="gallery-thumb">
+          <img src="images/mouse1-3.png" alt="" onerror="this.style.display='none'; this.parentElement.textContent='🖱️'">
+        </div>
+        <div class="gallery-thumb">
+          <img src="images/mouse1-4.png" alt="" onerror="this.style.display='none'; this.parentElement.textContent='🖱️'">
+        </div>
+      </div>
+      <div class="gallery-main">
+        <img src="images/mouse1.png" alt="Razer DeathAdder V3" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
+        <span style="display:none">🖱️</span>
+      </div>
+    </div>
+
+    <!-- Інформація -->
+    <div class="product-info">
+      <h1>Razer DeathAdder V3</h1>
+
+      <div class="product-rating-row">
+        <span class="product-stars">★★★★★</span>
+        <span class="product-votes">4.9/5 (2,341 відгук)</span>
+      </div>
+
+      <div class="product-price-row">
+        <span class="product-price-main">$89</span>
+        <span class="product-price-old">$109</span>
+        <span class="product-badge-sale">-18%</span>
+      </div>
+
+      <p class="product-desc">
+        Razer DeathAdder V3 — це ультралегка ергономічна мишка для ПК з оптичним сенсором Focus Pro 30K. Вага лише 59г та нова форма корпусу забезпечують неперевершений контроль у будь-яких іграх.
+      </p>
+
+      <!-- Колір -->
+      <div>
+        <div class="product-option-title">Колір: Чорний</div>
+        <div class="color-options">
+          <div class="color-dot active" style="background:#111111;" title="Чорний"></div>
+          <div class="color-dot" style="background:#ffffff; border:1px solid #ccc;" title="Білий"></div>
+          <div class="color-dot" style="background:#22c55e;" title="Зелений"></div>
+        </div>
+      </div>
+
+      <!-- Кількість + купити -->
+      <div class="product-actions">
+        <div class="qty-control">
+          <button class="qty-btn" onclick="changeQty(-1)">−</button>
+          <span class="qty-num" id="qty">1</span>
+          <button class="qty-btn" onclick="changeQty(1)">+</button>
+        </div>
+        <a href="cart.html"><button class="btn-add-to-cart">Додати до кошика</button></a>
+      </div>
+
+      <!-- Характеристики -->
+      <div class="product-specs">
+        <div class="spec-row"><span class="spec-label">Сенсор</span><span class="spec-value">Razer Focus Pro 30K</span></div>
+        <div class="spec-row"><span class="spec-label">DPI</span><span class="spec-value">100 – 30 000</span></div>
+        <div class="spec-row"><span class="spec-label">Кнопки</span><span class="spec-value">5 програмованих</span></div>
+        <div class="spec-row"><span class="spec-label">Підключення</span><span class="spec-value">Дротова USB-A</span></div>
+        <div class="spec-row"><span class="spec-label">Вага</span><span class="spec-value">59 г</span></div>
+        <div class="spec-row"><span class="spec-label">Гарантія</span><span class="spec-value">2 роки</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Вкладки -->
+  <div class="product-tabs-section">
+    <div class="tabs-nav">
+      <button class="tab-btn active" onclick="openTab(event,'details')">Опис товару</button>
+      <button class="tab-btn" onclick="openTab(event,'reviews')">Відгуки (2,341)</button>
+      <button class="tab-btn" onclick="openTab(event,'faq')">FAQ</button>
+    </div>
+
+    <div id="details" class="tab-content active">
+      <p style="font-size:15px;color:var(--gray-mid);line-height:1.8;max-width:720px">
+        DeathAdder V3 переосмислює ергономічний дизайн з новим профілем корпусу, який підтримує широкий спектр хватів. Завдяки сенсору Focus Pro 30K з алгоритмом інтелектуального відстеження він ідеально працює на будь-яких поверхнях. Перемикачі оптичних кнопок 3-го покоління усувають дребезжання контактів — кожне клацання реагує миттєво.
+      </p>
+    </div>
+
+    <div id="reviews" class="tab-content">
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-name">Дмитро К. <span class="verified" style="color:var(--green)">✓</span></div>
+            <div class="review-date">12 серпня 2025</div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Найкраща мишка яку я тримав у руках. Вага 59г відчувається неймовірно. Точність сенсора на вищому рівні — ейм значно покращився."</p>
+        </div>
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-name">Олена М. <span class="verified" style="color:var(--green)">✓</span></div>
+            <div class="review-date">3 вересня 2025</div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Перейшла з G502 і не шкодую. Рука не втомлюється навіть після 6+ годин гри. Форма ідеально лягає в долоню."</p>
+        </div>
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-name">Іван С. <span class="verified" style="color:var(--green)">✓</span></div>
+            <div class="review-date">20 жовтня 2025</div>
+          </div>
+          <div class="review-stars">★★★★☆</div>
+          <p class="review-text">"Дуже хороша мишка. Єдиний мінус — кабель трохи жорсткуватий. В іншому все ідеально: точність, вага, клацання кнопок."</p>
+        </div>
+        <div class="review-card">
+          <div class="review-header">
+            <div class="review-name">Максим Р. <span class="verified" style="color:var(--green)">✓</span></div>
+            <div class="review-date">5 листопада 2025</div>
+          </div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Купив у Gear.co — доставка за день, упаковка відмінна. Мишка топова, sensor feels perfect. Рекомендую і мишку, і магазин!"</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="faq" class="tab-content">
+      <div style="max-width:600px;display:flex;flex-direction:column;gap:20px">
+        <div>
+          <p style="font-weight:700;margin-bottom:6px">Чи підходить ця мишка для великої руки?</p>
+          <p style="color:var(--gray-mid);font-size:14px;line-height:1.7">Так, DeathAdder V3 розроблена для середніх та великих рук. Довжина 128мм комфортна для більшості користувачів.</p>
+        </div>
+        <div>
+          <p style="font-weight:700;margin-bottom:6px">Є бездротова версія?</p>
+          <p style="color:var(--gray-mid);font-size:14px;line-height:1.7">Так! Існує DeathAdder V3 Pro з бездротовим підключенням HyperSpeed. Вона доступна окремо в каталозі.</p>
+        </div>
+        <div>
+          <p style="font-weight:700;margin-bottom:6px">Яка гарантія на товар?</p>
+          <p style="color:var(--gray-mid);font-size:14px;line-height:1.7">Офіційна гарантія Razer — 2 роки. Gear.co надає додатково 30 днів на повернення без питань.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Схожі товари -->
+  <div class="related-section">
+    <h2 class="section-title">Вам також може сподобатись</h2>
+    <div class="products-grid">
+      <a href="product.html" class="product-card">
+        <div class="product-img-wrap"><div class="product-placeholder">🖱️</div></div>
+        <div class="product-name">Logitech G Pro X Superlight 2</div>
+        <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-num">5.0/5</span></div>
+        <div class="product-price"><span class="price">$159</span></div>
+      </a>
+      <a href="product.html" class="product-card">
+        <div class="product-img-wrap"><div class="product-placeholder">🖱️</div></div>
+        <div class="product-name">Razer Viper V3 Pro</div>
+        <div class="product-rating"><span class="stars">★★★★☆</span><span class="rating-num">4.7/5</span></div>
+        <div class="product-price"><span class="price">$149</span><span class="price-old">$179</span><span class="badge-sale">-17%</span></div>
+      </a>
+      <a href="product.html" class="product-card">
+        <div class="product-img-wrap"><div class="product-placeholder">🖱️</div></div>
+        <div class="product-name">Zowie EC2-CW</div>
+        <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-num">4.8/5</span></div>
+        <div class="product-price"><span class="price">$99</span></div>
+      </a>
+      <a href="product.html" class="product-card">
+        <div class="product-img-wrap"><div class="product-placeholder">🖱️</div></div>
+        <div class="product-name">SteelSeries Rival 5</div>
+        <div class="product-rating"><span class="stars">★★★★☆</span><span class="rating-num">4.5/5</span></div>
+        <div class="product-price"><span class="price">$59</span><span class="price-old">$79</span><span class="badge-sale">-25%</span></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- Підвал -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo">GEAR.CO</div>
+        <p>Преміум периферія для геймерів та професіоналів.</p>
+        <div class="footer-social">
+          <div class="social-icon">𝕏</div><div class="social-icon">f</div><div class="social-icon">in</div><div class="social-icon">▶</div>
+        </div>
+      </div>
+      <div class="footer-col"><h4>Компанія</h4><ul><li><a href="#">Про нас</a></li><li><a href="#">Блог</a></li><li><a href="#">Вакансії</a></li></ul></div>
+      <div class="footer-col"><h4>Допомога</h4><ul><li><a href="#">Підтримка</a></li><li><a href="#">Доставка</a></li><li><a href="#">Умови</a></li></ul></div>
+      <div class="footer-col"><h4>FAQ</h4><ul><li><a href="#">Акаунт</a></li><li><a href="#">Замовлення</a></li><li><a href="#">Повернення</a></li></ul></div>
+      <div class="footer-col"><h4>Категорії</h4><ul><li><a href="category.html">Миші</a></li><li><a href="category.html">Клавіатури</a></li><li><a href="category.html">Навушники</a></li><li><a href="category.html">Монітори</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>Gear.co © 2025. Усі права захищені</span>
+      <div class="payment-icons"><span class="pay-badge">VISA</span><span class="pay-badge">Mastercard</span><span class="pay-badge">PayPal</span><span class="pay-badge">Apple Pay</span></div>
+    </div>
+  </footer>
+
+  <script>
+    function changeQty(delta) {
+      const el = document.getElementById('qty');
+      let val = parseInt(el.textContent) + delta;
+      if (val < 1) val = 1;
+      el.textContent = val;
+    }
+    function openTab(e, id) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      e.target.classList.add('active');
+    }
+  </script>
+</body>
+</html>

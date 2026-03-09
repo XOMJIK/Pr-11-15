@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Реєстрація — GEAR.CO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+  <div class="announcement">
+    🖥️ Зареєструйтесь і отримайте знижку 20% на перше замовлення. <u>Зареєструватись</u>
+    <span class="close" onclick="this.parentElement.style.display='none'">✕</span>
+  </div>
+
+  <header>
+    <a href="index.html" class="logo">GEAR.CO</a>
+    <nav>
+      <a href="index.html">Магазин ▾</a>
+      <a href="new-arrivals.html">Новинки</a>
+      <a href="brands.html">Бренди</a>
+      <a href="category.html">Розпродаж</a>
+    </nav>
+    <div class="search-bar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" placeholder="Пошук товарів..." onkeydown="if(event.key==='Enter'&&this.value) window.location.href='category.html?search='+encodeURIComponent(this.value)">
+    </div>
+    <div class="header-icons">
+      <a href="cart.html" class="cart-icon-wrap">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="cart-count">2</span>
+      </a>
+      <a href="login.html">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="auth-logo">GEAR.CO</div>
+      <div class="auth-title">Реєстрація</div>
+      <p class="auth-sub">Створи акаунт і отримай 20% знижку на перше замовлення!</p>
+
+      <div class="success-msg" id="successMsg">🎉 Акаунт створено! Перенаправлення...</div>
+
+      <div class="auth-form">
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div class="form-group">
+            <label class="form-label" for="firstName">Ім'я</label>
+            <input class="form-input" type="text" id="firstName" placeholder="Іван">
+            <span class="form-error" id="firstNameErr">Введіть ім'я</span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="lastName">Прізвище</label>
+            <input class="form-input" type="text" id="lastName" placeholder="Коваленко">
+            <span class="form-error" id="lastNameErr">Введіть прізвище</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="email">Електронна пошта</label>
+          <input class="form-input" type="email" id="email" placeholder="example@email.com">
+          <span class="form-error" id="emailErr">Введіть правильну електронну пошту</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="phone">Номер телефону</label>
+          <input class="form-input" type="tel" id="phone" placeholder="+380 xx xxx xx xx">
+          <span class="form-error" id="phoneErr">Введіть правильний номер телефону</span>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="password">Пароль</label>
+          <input class="form-input" type="password" id="password" placeholder="Мінімум 8 символів" oninput="checkStrength()">
+          <span class="form-error" id="passErr">Пароль повинен містити мінімум 8 символів</span>
+          <!-- Індикатор сили пароля -->
+          <div id="strengthBar" style="margin-top:6px;display:none">
+            <div style="height:4px;border-radius:2px;background:var(--gray-border);overflow:hidden">
+              <div id="strengthFill" style="height:100%;width:0;transition:width 0.3s,background 0.3s;border-radius:2px"></div>
+            </div>
+            <span id="strengthLabel" style="font-size:12px;color:var(--gray-mid)"></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="confirmPassword">Повторіть пароль</label>
+          <input class="form-input" type="password" id="confirmPassword" placeholder="Повторіть пароль">
+          <span class="form-error" id="confirmErr">Паролі не співпадають</span>
+        </div>
+
+        <div class="form-row">
+          <label>
+            <input type="checkbox" id="terms">
+            Я погоджуюсь з <a href="#">умовами використання</a>
+          </label>
+        </div>
+        <span class="form-error" id="termsErr">Необхідно прийняти умови</span>
+
+        <label style="display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--gray-mid);cursor:pointer">
+          <input type="checkbox" id="newsletter" checked style="margin-top:2px">
+          Хочу отримувати новини та спеціальні пропозиції на пошту
+        </label>
+
+        <button class="btn-auth" onclick="register()">Створити акаунт</button>
+
+        <div class="auth-divider">або</div>
+
+        <button class="btn-social" onclick="alert('В розробці 🚧')">
+          <span>🌐</span> Реєстрація через Google
+        </button>
+
+      </div>
+
+      <div class="auth-footer">
+        Вже є акаунт? <a href="login.html">Увійти</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-bottom" style="border-top:none;justify-content:center">
+      <span>Gear.co © 2025. Усі права захищені</span>
+    </div>
+  </footer>
+
+  <script>
+    function checkStrength() {
+      const val = document.getElementById('password').value;
+      const bar = document.getElementById('strengthBar');
+      const fill = document.getElementById('strengthFill');
+      const label = document.getElementById('strengthLabel');
+
+      if (!val) { bar.style.display = 'none'; return; }
+      bar.style.display = 'block';
+
+      let score = 0;
+      if (val.length >= 8)  score++;
+      if (/[A-Z]/.test(val)) score++;
+      if (/[0-9]/.test(val)) score++;
+      if (/[^A-Za-z0-9]/.test(val)) score++;
+
+      const levels = [
+        { pct: '25%', bg: '#ef4444', text: 'Слабкий' },
+        { pct: '50%', bg: '#f97316', text: 'Середній' },
+        { pct: '75%', bg: '#eab308', text: 'Добрий' },
+        { pct: '100%', bg: '#22c55e', text: 'Надійний' },
+      ];
+      const lvl = levels[score - 1] || levels[0];
+      fill.style.width      = lvl.pct;
+      fill.style.background = lvl.bg;
+      label.textContent     = lvl.text;
+      label.style.color     = lvl.bg;
+    }
+
+    function register() {
+      // Скидаємо всі помилки
+      ['firstName','lastName','email','phone','password','confirmPassword'].forEach(id => {
+        document.getElementById(id).classList.remove('error');
+      });
+      document.querySelectorAll('.form-error').forEach(e => e.classList.remove('show'));
+
+      const firstName = document.getElementById('firstName').value.trim();
+      const lastName  = document.getElementById('lastName').value.trim();
+      const email     = document.getElementById('email').value.trim();
+      const phone     = document.getElementById('phone').value.trim();
+      const password  = document.getElementById('password').value;
+      const confirm   = document.getElementById('confirmPassword').value;
+      const terms     = document.getElementById('terms').checked;
+      let valid = true;
+
+      function err(fieldId, errId) {
+        document.getElementById(fieldId).classList.add('error');
+        document.getElementById(errId).classList.add('show');
+        valid = false;
+      }
+
+      if (!firstName) err('firstName', 'firstNameErr');
+      if (!lastName)  err('lastName', 'lastNameErr');
+
+      const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRe.test(email)) err('email', 'emailErr');
+
+      const phoneRe = /^\+?[\d\s\-]{10,15}$/;
+      if (!phoneRe.test(phone)) err('phone', 'phoneErr');
+
+      if (password.length < 8) err('password', 'passErr');
+
+      if (password !== confirm) err('confirmPassword', 'confirmErr');
+
+      if (!terms) {
+        document.getElementById('termsErr').classList.add('show');
+        valid = false;
+      }
+
+      if (!valid) return;
+
+      document.getElementById('successMsg').classList.add('show');
+      setTimeout(() => { window.location.href = 'index.html'; }, 1800);
+    }
+  </script>
+</body>
+</html>
