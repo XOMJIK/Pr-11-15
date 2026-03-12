@@ -23,7 +23,7 @@
       <a href="index.html">Магазин ▾</a>
       <a href="new-arrivals.html">Новинки</a>
       <a href="brands.html">Бренди</a>
-      <a href="category.html">Розпродаж</a>
+      <a href="category.html">Каталог</a>
     </nav>
     <div class="search-bar">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -32,7 +32,7 @@
     <div class="header-icons">
       <a href="cart.html" class="cart-icon-wrap">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-        <span class="cart-count">2</span>
+        <span class="cart-count" id="cartCount">0</span>
       </a>
       <a href="login.html">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -404,11 +404,63 @@
       e.target.classList.add('active');
     }
 
-    function addToCart() {
-      const name  = document.getElementById('prodName').textContent;
-      const qty   = document.getElementById('qty').textContent;
-      alert(`✓ Додано до кошика:\n${name} × ${qty}`);
+    async function addToCart() {
+  const token = localStorage.getItem('token');
+
+  if (!token) {
+    if (confirm('Щоб додати товар до кошика потрібно увійти. Перейти до входу?')) {
+      window.location.href = 'login.html';
     }
+    return;
+  }
+
+  const name     = document.getElementById('prodName').textContent;
+  const qty      = parseInt(document.getElementById('qty').textContent);
+  const p        = new URLSearchParams(window.location.search);
+  const productId = p.get('id');
+
+  if (!productId) {
+    alert('Помилка: товар не знайдено в базі даних');
+    return;
+  }
+
+  try {
+    const res = await fetch('/api/cart', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ product_id: parseInt(productId), quantity: qty }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      alert('Помилка: ' + data.message);
+      return;
+    }
+
+    // Оновити лічильник
+    const countEl = document.getElementById('cartCount');
+    if (countEl) countEl.textContent = parseInt(countEl.textContent || 0) + qty;
+
+    // Показати повідомлення
+    const btn = document.querySelector('.btn-add-to-cart');
+    const original = btn.textContent;
+    btn.textContent = '✓ Додано до кошика!';
+    btn.style.background = '#22c55e';
+    btn.style.color = '#000';
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.style.background = '';
+      btn.style.color = '';
+    }, 2000);
+
+  } catch (err) {
+    alert('Помилка сервера. Спробуй ще раз.');
+  }
+}
   </script>
 </body>
 </html>

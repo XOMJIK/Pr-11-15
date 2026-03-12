@@ -88,4 +88,52 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  const updateHeader = () => {
+    const user = JSON.parse(localStorage.getItem('user') || 'null');
+    const userLinks = document.querySelectorAll('.header-icons a[href="login.html"], .header-icons a[href="profile.html"]');
+    if (!userLinks.length) return;
+
+    userLinks.forEach(userIcon => {
+      if (user) {
+        userIcon.href = 'profile.html';
+        userIcon.innerHTML = `
+          <div style="display:flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:var(--accent)">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+              <circle cx="12" cy="7" r="4"/>
+            </svg>
+            ${user.first_name}
+          </div>`;
+      } else {
+        userIcon.href = 'login.html';
+      }
+    });
+  };
+
+  updateHeader();
+
+  const updateCartCount = () => {
+    const token = localStorage.getItem('token');
+    const countEl = document.getElementById('cartCount');
+    if (!countEl) return;
+
+    if (!token) {
+      countEl.textContent = '0';
+      return;
+    }
+
+    fetch('/api/cart', {
+      headers: { 'Authorization': 'Bearer ' + token }
+    })
+    .then(r => r.json())
+    .then(data => {
+      countEl.textContent = data.data?.length || 0;
+    })
+    .catch(() => {
+      countEl.textContent = '0';
+    });
+  };
+
+  updateCartCount();
+
 });

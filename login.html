@@ -21,7 +21,7 @@
       <a href="index.html">Магазин ▾</a>
       <a href="new-arrivals.html">Новинки</a>
       <a href="brands.html">Бренди</a>
-      <a href="category.html">Розпродаж</a>
+      <a href="category.html">Каталог</a>
     </nav>
     <div class="search-bar">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -30,7 +30,7 @@
     <div class="header-icons">
       <a href="cart.html" class="cart-icon-wrap">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-        <span class="cart-count">2</span>
+        <span class="cart-count" id="cartCount">0</span>
       </a>
       <a href="login.html">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -91,40 +91,61 @@
   </footer>
 
   <script>
-    function login() {
-      const email    = document.getElementById('email');
-      const password = document.getElementById('password');
-      const emailErr = document.getElementById('emailErr');
-      const passErr  = document.getElementById('passErr');
-      let valid = true;
+    async function login() {
+  const email    = document.getElementById('email');
+  const password = document.getElementById('password');
+  const emailErr = document.getElementById('emailErr');
+  const passErr  = document.getElementById('passErr');
+  let valid = true;
 
-      email.classList.remove('error');
-      password.classList.remove('error');
-      emailErr.classList.remove('show');
-      passErr.classList.remove('show');
+  email.classList.remove('error');
+  password.classList.remove('error');
+  emailErr.classList.remove('show');
+  passErr.classList.remove('show');
 
-      const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRe.test(email.value.trim())) {
-        email.classList.add('error');
-        emailErr.classList.add('show');
-        valid = false;
-      }
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRe.test(email.value.trim())) {
+    email.classList.add('error');
+    emailErr.classList.add('show');
+    valid = false;
+  }
+  if (password.value.length < 6) {
+    password.classList.add('error');
+    passErr.classList.add('show');
+    valid = false;
+  }
+  if (!valid) return;
 
-      if (password.value.length < 6) {
-        password.classList.add('error');
-        passErr.classList.add('show');
-        valid = false;
-      }
+  try {
+    const res = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email:    email.value.trim(),
+        password: password.value,
+      }),
+    });
 
-      if (!valid) return;
+    const data = await res.json();
 
-      document.getElementById('successMsg').classList.add('show');
-      setTimeout(() => { window.location.href = 'index.html'; }, 1500);
+    if (!res.ok) {
+      emailErr.textContent = data.message || 'Невірний email або пароль';
+      emailErr.classList.add('show');
+      email.classList.add('error');
+      return;
     }
 
-    function socialLogin(provider) {
-      alert(`Вхід через ${provider} — функціонал в розробці 🚧`);
-    }
+    // Зберігаємо токен і дані юзера
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('user', JSON.stringify(data.user));
+
+    document.getElementById('successMsg').classList.add('show');
+    setTimeout(() => { window.location.href = 'index.html'; }, 1500);
+
+  } catch (err) {
+    alert('Помилка сервера. Спробуй ще раз.');
+  }
+}
   </script>
 </body>
 </html>

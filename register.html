@@ -21,7 +21,7 @@
       <a href="index.html">Магазин ▾</a>
       <a href="new-arrivals.html">Новинки</a>
       <a href="brands.html">Бренди</a>
-      <a href="category.html">Розпродаж</a>
+      <a href="category.html">Каталог</a>
     </nav>
     <div class="search-bar">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -30,7 +30,7 @@
     <div class="header-icons">
       <a href="cart.html" class="cart-icon-wrap">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-        <span class="cart-count">2</span>
+        <span class="cart-count" id="cartCount">0</span>
       </a>
       <a href="login.html">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -155,50 +155,80 @@
       label.style.color     = lvl.bg;
     }
 
-    function register() {
-      ['firstName','lastName','email','phone','password','confirmPassword'].forEach(id => {
-        document.getElementById(id).classList.remove('error');
-      });
-      document.querySelectorAll('.form-error').forEach(e => e.classList.remove('show'));
+    async function register() {
+  ['firstName','lastName','email','phone','password','confirmPassword'].forEach(id => {
+    document.getElementById(id).classList.remove('error');
+  });
+  document.querySelectorAll('.form-error').forEach(e => e.classList.remove('show'));
 
-      const firstName = document.getElementById('firstName').value.trim();
-      const lastName  = document.getElementById('lastName').value.trim();
-      const email     = document.getElementById('email').value.trim();
-      const phone     = document.getElementById('phone').value.trim();
-      const password  = document.getElementById('password').value;
-      const confirm   = document.getElementById('confirmPassword').value;
-      const terms     = document.getElementById('terms').checked;
-      let valid = true;
+  const firstName = document.getElementById('firstName').value.trim();
+  const lastName  = document.getElementById('lastName').value.trim();
+  const email     = document.getElementById('email').value.trim();
+  const phone     = document.getElementById('phone').value.trim();
+  const password  = document.getElementById('password').value;
+  const confirm   = document.getElementById('confirmPassword').value;
+  const terms     = document.getElementById('terms').checked;
+  let valid = true;
 
-      function err(fieldId, errId) {
-        document.getElementById(fieldId).classList.add('error');
-        document.getElementById(errId).classList.add('show');
-        valid = false;
-      }
+  function err(fieldId, errId) {
+    document.getElementById(fieldId).classList.add('error');
+    document.getElementById(errId).classList.add('show');
+    valid = false;
+  }
 
-      if (!firstName) err('firstName', 'firstNameErr');
-      if (!lastName)  err('lastName', 'lastNameErr');
+  if (!firstName) err('firstName', 'firstNameErr');
+  if (!lastName)  err('lastName',  'lastNameErr');
 
-      const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRe.test(email)) err('email', 'emailErr');
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRe.test(email)) err('email', 'emailErr');
 
-      const phoneRe = /^\+?[\d\s\-]{10,15}$/;
-      if (!phoneRe.test(phone)) err('phone', 'phoneErr');
+  const phoneRe = /^\+?[\d\s\-]{10,15}$/;
+  if (!phoneRe.test(phone)) err('phone', 'phoneErr');
 
-      if (password.length < 8) err('password', 'passErr');
+  if (password.length < 8) err('password', 'passErr');
+  if (password !== confirm) err('confirmPassword', 'confirmErr');
 
-      if (password !== confirm) err('confirmPassword', 'confirmErr');
+  if (!terms) {
+    document.getElementById('termsErr').classList.add('show');
+    valid = false;
+  }
 
-      if (!terms) {
-        document.getElementById('termsErr').classList.add('show');
-        valid = false;
-      }
+  if (!valid) return;
 
-      if (!valid) return;
+  try {
+    const res = await fetch('/api/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        first_name: firstName,
+        last_name:  lastName,
+        email,
+        phone,
+        password,
+      }),
+    });
 
-      document.getElementById('successMsg').classList.add('show');
-      setTimeout(() => { window.location.href = 'index.html'; }, 1800);
+    const data = await res.json();
+
+    if (!res.ok) {
+      const emailErr = document.getElementById('emailErr');
+      emailErr.textContent = data.message || 'Помилка реєстрації';
+      emailErr.classList.add('show');
+      document.getElementById('email').classList.add('error');
+      return;
     }
+
+    // Зберігаємо токен і дані юзера
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('user', JSON.stringify(data.user));
+
+    document.getElementById('successMsg').classList.add('show');
+    setTimeout(() => { window.location.href = 'index.html'; }, 1800);
+
+  } catch (err) {
+    alert('Помилка сервера. Спробуй ще раз.');
+  }
+}
   </script>
 </body>
 </html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Особистий кабінет — GEAR.CO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <style>
+    .profile-page { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+    .profile-grid { display: grid; grid-template-columns: 280px 1fr; gap: 24px; }
+    .profile-card { background: var(--gray-card); border: 1px solid var(--gray-border); border-radius: 12px; padding: 28px; }
+    .profile-avatar { width: 80px; height: 80px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 800; color: #000; margin: 0 auto 16px; }
+    .profile-name { font-size: 20px; font-weight: 700; text-align: center; }
+    .profile-email { font-size: 13px; color: var(--gray-mid); text-align: center; margin-top: 4px; }
+    .profile-menu { margin-top: 24px; display: flex; flex-direction: column; gap: 4px; }
+    .profile-menu-item { padding: 10px 14px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 500; transition: background 0.2s; }
+    .profile-menu-item:hover { background: rgba(255,255,255,0.05); }
+    .profile-menu-item.active { background: var(--accent); color: #000; }
+    .profile-menu-item.danger { color: #ef4444; }
+    .profile-menu-item.danger:hover { background: rgba(239,68,68,0.1); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .section-head { font-size: 20px; font-weight: 700; margin-bottom: 20px; }
+    .info-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    .info-group label { font-size: 12px; color: var(--gray-mid); margin-bottom: 6px; display: block; }
+    .info-value { font-size: 15px; font-weight: 500; }
+    .cart-item { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--gray-border); }
+    .cart-item-img { width: 64px; height: 64px; object-fit: contain; background: rgba(255,255,255,0.03); border-radius: 8px; padding: 8px; }
+    .cart-item-name { font-weight: 600; flex: 1; }
+    .cart-item-price { font-weight: 700; color: var(--accent); }
+    .cart-item-qty { display: flex; align-items: center; gap: 8px; }
+    .qty-btn { width: 28px; height: 28px; border-radius: 6px; background: rgba(255,255,255,0.08); border: none; color: #fff; cursor: pointer; font-size: 16px; }
+    .cart-total { text-align: right; margin-top: 20px; font-size: 18px; font-weight: 700; }
+    .empty-state { text-align: center; padding: 40px; color: var(--gray-mid); font-size: 15px; }
+    @media(max-width:700px){ .profile-grid{ grid-template-columns:1fr; } .info-row{ grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+
+  <div class="announcement">
+    🖥️ Зареєструйтесь і отримайте знижку 20% на перше замовлення.
+    <span class="close" onclick="this.parentElement.style.display='none'">✕</span>
+  </div>
+
+  <header>
+    <a href="index.html" class="logo">GEAR.CO</a>
+    <nav>
+      <a href="index.html">Магазин ▾</a>
+      <a href="new-arrivals.html">Новинки</a>
+      <a href="brands.html">Бренди</a>
+      <a href="category.html">Каталог</a>
+    </nav>
+    <div class="search-bar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" placeholder="Пошук товарів..." onkeydown="if(event.key==='Enter'&&this.value) window.location.href='category.html?search='+encodeURIComponent(this.value)">
+    </div>
+    <div class="header-icons">
+      <a href="cart.html" class="cart-icon-wrap">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </a>
+      <a href="profile.html">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <div class="profile-page">
+    <div class="profile-grid">
+
+      <!-- Бокова панель -->
+      <div>
+        <div class="profile-card">
+          <div class="profile-avatar" id="avatarInitials">?</div>
+          <div class="profile-name" id="profileName">Завантаження...</div>
+          <div class="profile-email" id="profileEmail"></div>
+          <div class="profile-menu">
+            <div class="profile-menu-item active" onclick="showTab('info', this)">👤 Мої дані</div>
+            <div class="profile-menu-item" onclick="showTab('cart', this)">🛒 Кошик</div>
+            <div class="profile-menu-item danger" onclick="logout()">🚪 Вийти</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Основний контент -->
+      <div class="profile-card">
+
+        <!-- Мої дані -->
+        <div id="tab-info" class="tab-content active">
+          <div class="section-head">Мої дані</div>
+          <div class="info-row">
+            <div class="info-group">
+              <label>Імʼя</label>
+              <div class="info-value" id="infoFirstName">—</div>
+            </div>
+            <div class="info-group">
+              <label>Прізвище</label>
+              <div class="info-value" id="infoLastName">—</div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-group">
+              <label>Email</label>
+              <div class="info-value" id="infoEmail">—</div>
+            </div>
+            <div class="info-group">
+              <label>Телефон</label>
+              <div class="info-value" id="infoPhone">—</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Кошик -->
+        <div id="tab-cart" class="tab-content">
+          <div class="section-head">Мій кошик</div>
+          <div id="cartItems"><div class="empty-state">Завантаження...</div></div>
+          <div class="cart-total" id="cartTotal"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-bottom" style="border-top:none;justify-content:center">
+      <span>Gear.co © 2025. Усі права захищені</span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    const token = localStorage.getItem('token');
+    const user  = JSON.parse(localStorage.getItem('user') || 'null');
+
+    // Якщо не залогінений — редирект на логін
+    if (!token || !user) {
+      window.location.href = 'login.html';
+    }
+
+    // Заповнити дані юзера
+    document.getElementById('avatarInitials').textContent =
+      (user.first_name?.[0] || '') + (user.last_name?.[0] || '');
+    document.getElementById('profileName').textContent =
+      user.first_name + ' ' + user.last_name;
+    document.getElementById('profileEmail').textContent = user.email;
+    document.getElementById('infoFirstName').textContent = user.first_name;
+    document.getElementById('infoLastName').textContent  = user.last_name;
+    document.getElementById('infoEmail').textContent     = user.email;
+    document.getElementById('infoPhone').textContent     = user.phone || '—';
+
+    // Показати вкладку
+    function showTab(name, el) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.profile-menu-item').forEach(m => m.classList.remove('active'));
+      document.getElementById('tab-' + name).classList.add('active');
+      el.classList.add('active');
+      if (name === 'cart') loadCart();
+    }
+
+    // Завантажити кошик з API
+    async function loadCart() {
+      try {
+        const res = await fetch('/api/cart', {
+          headers: { 'Authorization': 'Bearer ' + token }
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          document.getElementById('cartItems').innerHTML =
+            '<div class="empty-state">Помилка завантаження кошика</div>';
+          return;
+        }
+
+        if (data.data.length === 0) {
+          document.getElementById('cartItems').innerHTML =
+            '<div class="empty-state">🛒 Кошик порожній</div>';
+          document.getElementById('cartTotal').textContent = '';
+          return;
+        }
+
+        document.getElementById('cartItems').innerHTML = data.data.map(item => `
+          <div class="cart-item">
+            <img class="cart-item-img" src="${item.image}" alt="${item.name}"
+                 onerror="this.style.display='none'">
+            <div class="cart-item-name">${item.name}</div>
+            <div class="cart-item-qty">
+              <button class="qty-btn" onclick="changeQty(${item.id}, ${item.quantity - 1})">−</button>
+              <span>${item.quantity}</span>
+              <button class="qty-btn" onclick="changeQty(${item.id}, ${item.quantity + 1})">+</button>
+            </div>
+            <div class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</div>
+            <button class="qty-btn" onclick="removeItem(${item.id})" style="color:#ef4444">✕</button>
+          </div>
+        `).join('');
+
+        document.getElementById('cartTotal').textContent =
+          'Разом: $' + data.total.toFixed(2);
+
+        document.getElementById('cartCount').textContent = data.data.length;
+
+      } catch (err) {
+        document.getElementById('cartItems').innerHTML =
+          '<div class="empty-state">Помилка сервера</div>';
+      }
+    }
+
+    // Змінити кількість
+    async function changeQty(id, qty) {
+      if (qty < 1) { removeItem(id); return; }
+      await fetch('/api/cart/' + id, {
+        method: 'PATCH',
+        headers: {
+          'Authorization': 'Bearer ' + token,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ quantity: qty })
+      });
+      loadCart();
+    }
+
+    // Видалити товар
+    async function removeItem(id) {
+      await fetch('/api/cart/' + id, {
+        method: 'DELETE',
+        headers: { 'Authorization': 'Bearer ' + token }
+      });
+      loadCart();
+    }
+
+    // Вийти
+    function logout() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      window.location.href = 'index.html';
+    }
+  </script>
+</body>
+</html>

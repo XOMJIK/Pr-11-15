@@ -22,7 +22,7 @@
       <a href="index.html">Магазин ▾</a>
       <a href="new-arrivals.html">Новинки</a>
       <a href="brands.html">Бренди</a>
-      <a href="category.html" class="active">Розпродаж</a>
+      <a href="category.html" class="active">Каталог</a>
     </nav>
     <div class="search-bar">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
@@ -31,7 +31,7 @@
     <div class="header-icons">
       <a href="cart.html" class="cart-icon-wrap">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-        <span class="cart-count">2</span>
+        <span class="cart-count" id="cartCount">0</span>
       </a>
       <a href="login.html">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -57,7 +57,6 @@
         <label class="filter-option"><input type="checkbox" class="filter-cat" value="Навушники" onchange="filterProducts()"> Навушники</label>
         <label class="filter-option"><input type="checkbox" class="filter-cat" value="Монітори" onchange="filterProducts()"> Монітори</label>
         <label class="filter-option"><input type="checkbox" class="filter-cat" value="Килимки" onchange="filterProducts()"> Килимки для миші</label>
-        <label class="filter-option"><input type="checkbox" class="filter-cat" value="Комп'ютери" onchange="filterProducts()"> Комп'ютери</label>
       </div>
 
       <div class="filter-group">
@@ -77,13 +76,6 @@
         <label class="filter-option"><input type="checkbox" class="filter-brand" value="HyperX" onchange="filterProducts()"> HyperX</label>
         <label class="filter-option"><input type="checkbox" class="filter-brand" value="Zowie" onchange="filterProducts()"> Zowie</label>
         <label class="filter-option"><input type="checkbox" class="filter-brand" value="Samsung" onchange="filterProducts()"> Samsung</label>
-      </div>
-
-      <div class="filter-group">
-        <div class="filter-group-title">Підключення <span>▾</span></div>
-        <label class="filter-option"><input type="checkbox" class="filter-conn" value="Дротова" onchange="filterProducts()"> Дротова</label>
-        <label class="filter-option"><input type="checkbox" class="filter-conn" value="Бездротова" onchange="filterProducts()"> Бездротова</label>
-        <label class="filter-option"><input type="checkbox" class="filter-conn" value="Bluetooth" onchange="filterProducts()"> Bluetooth</label>
       </div>
     </aside>
 
@@ -106,147 +98,9 @@
       <div class="active-filters" id="activeTags"></div>
 
       <div class="catalog-grid" id="catalogGrid">
-
-        <a href="product.html" class="product-card"
-           data-cat="Миші" data-brand="Razer" data-price="89" data-rating="4.9" data-conn="Дротова"
-           data-name="Razer DeathAdder V3">
-          <div class="product-img-wrap">
-            <img src="images/mouse1.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="product-placeholder" style="display:none">🖱️</div>
-          </div>
-          <div class="product-name">Razer DeathAdder V3</div>
-          <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-num">4.9/5</span></div>
-          <div class="product-price"><span class="price">$89</span></div>
-        </a>
-
-        <a href="product.html" class="product-card"
-           data-cat="Миші" data-brand="Logitech" data-price="159" data-rating="5.0" data-conn="Бездротова"
-           data-name="Logitech G502 X Plus">
-          <div class="product-img-wrap">
-            <img src="images/mouse2.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="product-placeholder" style="display:none">🖱️</div>
-          </div>
-          <div class="product-name">Logitech G502 X Plus</div>
-          <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-num">5.0/5</span></div>
-          <div class="product-price"><span class="price">$159</span><span class="price-old">$199</span><span class="badge-sale">-20%</span></div>
-        </a>
-
-        <a href="product.html" class="product-card"
-           data-cat="Миші" data-brand="Zowie" data-price="99" data-rating="4.8" data-conn="Дротова"
-           data-name="Zowie EC2-CW">
-          <div class="product-img-wrap">
-            <div class="product-placeholder">🖱️</div>
-          </div>
-          <div class="product-name">Zowie EC2-CW</div>
-          <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-num">4.8/5</span></div>
-          <div class="product-price"><span class="price">$99</span></div>
-        </a>
-
-        <a href="product.html" class="product-card"
-           data-cat="Клавіатури" data-brand="Logitech" data-price="129" data-rating="4.7" data-conn="Дротова"
-           data-name="Logitech G Pro X TKL">
-          <div class="product-img-wrap">
-            <img src="images/keyboard1.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="product-placeholder" style="display:none">⌨️</div>
-          </div>
-          <div class="product-name">Logitech G Pro X TKL</div>
-          <div class="product-rating"><span class="stars">★★★★☆</span><span class="rating-num">4.7/5</span></div>
-          <div class="product-price"><span class="price">$129</span><span class="price-old">$159</span><span class="badge-sale">-19%</span></div>
-        </a>
-
-        <a href="product.html" class="product-card"
-           data-cat="Клавіатури" data-brand="Corsair" data-price="139" data-rating="4.5" data-conn="Дротова"
-           data-name="Corsair K70 RGB Pro">
-          <div class="product-img-wrap">
-            <img src="images/keyboard2.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="product-placeholder" style="display:none">⌨️</div>
-          </div>
-          <div class="product-name">Corsair K70 RGB Pro</div>
-          <div class="product-rating"><span class="stars">★★★★☆</span><span class="rating-num">4.5/5</span></div>
-          <div class="product-price"><span class="price">$139</span></div>
-        </a>
-
-        <a href="product.html" class="product-card"
-           data-cat="Навушники" data-brand="HyperX" data-price="99" data-rating="4.8" data-conn="Дротова"
-           data-name="HyperX Cloud III">
-          <div class="product-img-wrap">
-            <img src="images/headset1.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="product-placeholder" style="display:none">🎧</div>
-          </div>
-          <div class="product-name">HyperX Cloud III</div>
-          <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-num">4.8/5</span></div>
-          <div class="product-price"><span class="price">$99</span></div>
-        </a>
-
-        <a href="product.html" class="product-card"
-           data-cat="Навушники" data-brand="SteelSeries" data-price="149" data-rating="4.8" data-conn="Бездротова"
-           data-name="SteelSeries Arctis Nova 7">
-          <div class="product-img-wrap">
-            <img src="images/headset2.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="product-placeholder" style="display:none">🎧</div>
-          </div>
-          <div class="product-name">SteelSeries Arctis Nova 7</div>
-          <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-num">4.8/5</span></div>
-          <div class="product-price"><span class="price">$149</span><span class="price-old">$179</span><span class="badge-sale">-17%</span></div>
-        </a>
-
-        <a href="product.html" class="product-card"
-           data-cat="Монітори" data-brand="Samsung" data-price="299" data-rating="4.6" data-conn="Дротова"
-           data-name="Samsung Odyssey G5 27">
-          <div class="product-img-wrap">
-            <img src="images/monitor1.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="product-placeholder" style="display:none">🖥️</div>
-          </div>
-          <div class="product-name">Samsung Odyssey G5 27"</div>
-          <div class="product-rating"><span class="stars">★★★★☆</span><span class="rating-num">4.6/5</span></div>
-          <div class="product-price"><span class="price">$299</span><span class="price-old">$379</span><span class="badge-sale">-21%</span></div>
-        </a>
-
-        <a href="product.html" class="product-card"
-           data-cat="Килимки" data-brand="SteelSeries" data-price="49" data-rating="4.9" data-conn="Дротова"
-           data-name="SteelSeries QcK XXL">
-          <div class="product-img-wrap">
-            <img src="images/mousepad1.png" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-            <div class="product-placeholder" style="display:none">🖱️</div>
-          </div>
-          <div class="product-name">SteelSeries QcK XXL</div>
-          <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-num">4.9/5</span></div>
-          <div class="product-price"><span class="price">$49</span><span class="price-old">$59</span><span class="badge-sale">-17%</span></div>
-        </a>
-
-        <a href="product.html" class="product-card"
-           data-cat="Миші" data-brand="Razer" data-price="149" data-rating="4.7" data-conn="Бездротова"
-           data-name="Razer Viper V3 Pro">
-          <div class="product-img-wrap">
-            <div class="product-placeholder">🖱️</div>
-          </div>
-          <div class="product-name">Razer Viper V3 Pro</div>
-          <div class="product-rating"><span class="stars">★★★★☆</span><span class="rating-num">4.7/5</span></div>
-          <div class="product-price"><span class="price">$149</span><span class="price-old">$179</span><span class="badge-sale">-17%</span></div>
-        </a>
-
-        <a href="product.html" class="product-card"
-           data-cat="Миші" data-brand="HyperX" data-price="49" data-rating="4.8" data-conn="Дротова"
-           data-name="HyperX Pulsefire Haste 2">
-          <div class="product-img-wrap">
-            <div class="product-placeholder">🖱️</div>
-          </div>
-          <div class="product-name">HyperX Pulsefire Haste 2</div>
-          <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-num">4.8/5</span></div>
-          <div class="product-price"><span class="price">$49</span><span class="price-old">$59</span><span class="badge-sale">-17%</span></div>
-        </a>
-
-        <a href="product.html" class="product-card"
-           data-cat="Клавіатури" data-brand="Razer" data-price="109" data-rating="4.6" data-conn="Бездротова"
-           data-name="Razer BlackWidow V4 Pro">
-          <div class="product-img-wrap">
-            <div class="product-placeholder">⌨️</div>
-          </div>
-          <div class="product-name">Razer BlackWidow V4 Pro</div>
-          <div class="product-rating"><span class="stars">★★★★☆</span><span class="rating-num">4.6/5</span></div>
-          <div class="product-price"><span class="price">$109</span></div>
-        </a>
-
+        <div style="text-align:center;padding:40px;color:var(--gray-mid);grid-column:1/-1">
+          Завантаження товарів...
+        </div>
       </div>
 
       <div id="noResults" style="display:none;text-align:center;padding:60px 20px">
@@ -256,12 +110,8 @@
         <button class="btn-outline" style="margin-top:20px" onclick="resetFilters()">Скинути фільтри</button>
       </div>
 
-      <div class="pagination" id="pagination">
-        <button class="page-btn prev">← Назад</button>
+      <div class="pagination" id="pagination" style="display:none">
         <button class="page-btn active">1</button>
-        <button class="page-btn">2</button>
-        <button class="page-btn">3</button>
-        <button class="page-btn next">Вперед →</button>
       </div>
     </div>
   </div>
@@ -279,11 +129,11 @@
       <div class="footer-col"><h4>Допомога</h4><ul><li><a href="#">Підтримка</a></li><li><a href="#">Доставка</a></li><li><a href="#">Умови</a></li></ul></div>
       <div class="footer-col"><h4>FAQ</h4><ul><li><a href="#">Акаунт</a></li><li><a href="#">Замовлення</a></li><li><a href="#">Повернення</a></li></ul></div>
       <div class="footer-col"><h4>Категорії</h4><ul>
-        <li><a href="category.html">Миші</a></li>
-        <li><a href="category.html">Клавіатури</a></li>
-        <li><a href="category.html">Навушники</a></li>
-        <li><a href="category.html">Монітори</a></li>
-        <li><a href="category.html">Килимки</a></li>
+        <li><a href="category.html?cat=Миші">Миші</a></li>
+        <li><a href="category.html?cat=Клавіатури">Клавіатури</a></li>
+        <li><a href="category.html?cat=Навушники">Навушники</a></li>
+        <li><a href="category.html?cat=Монітори">Монітори</a></li>
+        <li><a href="category.html?cat=Килимки">Килимки</a></li>
       </ul></div>
     </div>
     <div class="footer-bottom">
@@ -292,48 +142,98 @@
     </div>
   </footer>
 
+  <script src="js/main.js"></script>
   <script>
-    function filterProducts() {
-      const cards       = document.querySelectorAll('#catalogGrid .product-card');
-      const searchVal   = document.getElementById('searchInput').value.toLowerCase();
-      const maxPrice    = parseFloat(document.getElementById('priceRange').value);
-      const selCats     = [...document.querySelectorAll('.filter-cat:checked')].map(c => c.value);
-      const selBrands   = [...document.querySelectorAll('.filter-brand:checked')].map(c => c.value);
-      const selConns    = [...document.querySelectorAll('.filter-conn:checked')].map(c => c.value);
+    let allProducts = [];
 
-      let visible = 0;
-      cards.forEach(card => {
-        const name  = card.dataset.name.toLowerCase();
-        const price = parseFloat(card.dataset.price);
-        const cat   = card.dataset.cat;
-        const brand = card.dataset.brand;
-        const conn  = card.dataset.conn;
-
-        const matchSearch = !searchVal || name.includes(searchVal);
-        const matchPrice  = price <= maxPrice;
-        const matchCat    = selCats.length   === 0 || selCats.includes(cat);
-        const matchBrand  = selBrands.length === 0 || selBrands.includes(brand);
-        const matchConn   = selConns.length  === 0 || selConns.includes(conn);
-
-        const show = matchSearch && matchPrice && matchCat && matchBrand && matchConn;
-        card.style.display = show ? '' : 'none';
-        if (show) visible++;
-      });
-
-      document.getElementById('visibleCount').textContent = visible;
-      document.getElementById('noResults').style.display  = visible === 0 ? 'block' : 'none';
-      document.getElementById('pagination').style.display = visible === 0 ? 'none'  : 'flex';
-
-      renderTags(selCats, selBrands, selConns, maxPrice);
+    async function loadProducts() {
+      try {
+        const res  = await fetch('/api/products');
+        const data = await res.json();
+        allProducts = data.data || [];
+        filterProducts();
+      } catch (err) {
+        document.getElementById('catalogGrid').innerHTML =
+          '<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--gray-mid)">Помилка завантаження</div>';
+      }
     }
 
-    function renderTags(cats, brands, conns, maxPrice) {
+    function renderProducts(products) {
+      const grid = document.getElementById('catalogGrid');
+
+      if (products.length === 0) {
+        grid.innerHTML = '';
+        document.getElementById('noResults').style.display  = 'block';
+        document.getElementById('pagination').style.display = 'none';
+        document.getElementById('visibleCount').textContent = '0';
+        return;
+      }
+
+      document.getElementById('noResults').style.display  = 'none';
+      document.getElementById('pagination').style.display = 'flex';
+      document.getElementById('visibleCount').textContent = products.length;
+
+      grid.innerHTML = products.map(p => {
+        const salePercent = p.price_old
+          ? Math.round((1 - p.price / p.price_old) * 100)
+          : null;
+        return `
+          <a href="product.html?id=${p.id}&name=${encodeURIComponent(p.name)}&price=${p.price}${p.price_old ? '&priceOld=' + p.price_old : ''}&brand=${encodeURIComponent(p.brand_name||'')}&cat=${encodeURIComponent(p.category_name||'')}&img=${encodeURIComponent(p.image||'')}&rating=${p.rating}&stars=${encodeURIComponent(getStars(p.rating))}&rnum=${p.rating}/5"
+             class="product-card">
+            <div class="product-img-wrap">
+              ${p.image
+                ? `<img src="${p.image}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="product-placeholder" style="display:none">${getCatEmoji(p.category_name)}</div>`
+                : `<div class="product-placeholder">${getCatEmoji(p.category_name)}</div>`}
+              ${p.is_new ? '<span class="badge-new">NEW</span>' : ''}
+            </div>
+            <div class="product-name">${p.name}</div>
+            <div class="product-rating">
+              <span class="stars">${getStars(p.rating)}</span>
+              <span class="rating-num">${p.rating}/5</span>
+            </div>
+            <div class="product-price">
+              <span class="price">$${p.price}</span>
+              ${p.price_old ? `<span class="price-old">$${p.price_old}</span>` : ''}
+              ${salePercent  ? `<span class="badge-sale">-${salePercent}%</span>` : ''}
+            </div>
+          </a>`;
+      }).join('');
+    }
+
+    function getCatEmoji(cat) {
+      const map = { 'Миші':'🖱️','Клавіатури':'⌨️','Навушники':'🎧','Монітори':'🖥️','Килимки':'🖱️' };
+      return map[cat] || '📦';
+    }
+
+    function getStars(rating) {
+      const full = Math.round(rating);
+      return '★'.repeat(full) + '☆'.repeat(5 - full);
+    }
+
+    function filterProducts() {
+      const searchVal = document.getElementById('searchInput').value.toLowerCase();
+      const maxPrice  = parseFloat(document.getElementById('priceRange').value);
+      const selCats   = [...document.querySelectorAll('.filter-cat:checked')].map(c => c.value);
+      const selBrands = [...document.querySelectorAll('.filter-brand:checked')].map(c => c.value);
+
+      const filtered = allProducts.filter(p => {
+        const matchSearch = !searchVal || p.name.toLowerCase().includes(searchVal);
+        const matchPrice  = parseFloat(p.price) <= maxPrice;
+        const matchCat    = selCats.length   === 0 || selCats.includes(p.category_name);
+        const matchBrand  = selBrands.length === 0 || selBrands.includes(p.brand_name);
+        return matchSearch && matchPrice && matchCat && matchBrand;
+      });
+
+      renderProducts(filtered);
+      renderTags(selCats, selBrands, maxPrice);
+    }
+
+    function renderTags(cats, brands, maxPrice) {
       const container = document.getElementById('activeTags');
       container.innerHTML = '';
       const all = [
-        ...cats.map(v   => ({ label: v,              type: 'cat'   })),
-        ...brands.map(v => ({ label: v,              type: 'brand' })),
-        ...conns.map(v  => ({ label: v,              type: 'conn'  })),
+        ...cats.map(v   => ({ label: v, type: 'cat'   })),
+        ...brands.map(v => ({ label: v, type: 'brand' })),
         ...(maxPrice < 500 ? [{ label: `до $${maxPrice}`, type: 'price' }] : [])
       ];
       all.forEach(tag => {
@@ -349,7 +249,7 @@
         document.getElementById('priceRange').value = 500;
         updatePriceLabel();
       } else {
-        const selector = type === 'cat' ? '.filter-cat' : type === 'brand' ? '.filter-brand' : '.filter-conn';
+        const selector = type === 'cat' ? '.filter-cat' : '.filter-brand';
         document.querySelectorAll(selector).forEach(cb => {
           if (cb.value === value) cb.checked = false;
         });
@@ -358,7 +258,7 @@
     }
 
     function resetFilters() {
-      document.querySelectorAll('.filter-cat, .filter-brand, .filter-conn').forEach(cb => cb.checked = false);
+      document.querySelectorAll('.filter-cat, .filter-brand').forEach(cb => cb.checked = false);
       document.getElementById('priceRange').value = 500;
       document.getElementById('searchInput').value = '';
       updatePriceLabel();
@@ -370,25 +270,19 @@
     }
 
     function sortProducts() {
-      const grid  = document.getElementById('catalogGrid');
-      const cards = [...grid.querySelectorAll('.product-card')];
-      const val   = document.querySelector('.sort-select').value;
-
-      cards.sort((a, b) => {
-        if (val === 'price-asc')  return parseFloat(a.dataset.price)  - parseFloat(b.dataset.price);
-        if (val === 'price-desc') return parseFloat(b.dataset.price)  - parseFloat(a.dataset.price);
-        if (val === 'rating')     return parseFloat(b.dataset.rating) - parseFloat(a.dataset.rating);
+      const val    = document.querySelector('.sort-select').value;
+      const sorted = [...allProducts].sort((a, b) => {
+        if (val === 'price-asc')  return parseFloat(a.price)  - parseFloat(b.price);
+        if (val === 'price-desc') return parseFloat(b.price)  - parseFloat(a.price);
+        if (val === 'rating')     return parseFloat(b.rating) - parseFloat(a.rating);
         return 0;
       });
-
-      cards.forEach(c => grid.appendChild(c));
+      allProducts = sorted;
+      filterProducts();
     }
 
     window.addEventListener('DOMContentLoaded', () => {
       const params = new URLSearchParams(window.location.search);
-
-      const q = params.get('search');
-      if (q) document.getElementById('searchInput').value = q;
 
       const cat = params.get('cat');
       if (cat) {
@@ -408,39 +302,10 @@
         document.getElementById('catalogTitle').textContent  = 'Бренд: ' + brand;
       }
 
-      setTimeout(() => filterProducts(), 0);
+      const q = params.get('search');
+      if (q) document.getElementById('searchInput').value = q;
 
-      document.querySelectorAll('#catalogGrid .product-card').forEach(card => {
-        card.addEventListener('click', function(e) {
-          e.preventDefault();
-          const imgEl  = this.querySelector('.product-img-wrap img');
-          const priceEl    = this.querySelector('.price');
-          const priceOldEl = this.querySelector('.price-old');
-          const saleEl     = this.querySelector('.badge-sale');
-          const stars  = this.querySelector('.stars')?.textContent || '★★★★★';
-          const rnum   = this.querySelector('.rating-num')?.textContent || '5.0/5';
-
-          let imgSrc = '';
-          if (imgEl) {
-            try { imgSrc = new URL(imgEl.src).pathname.replace(/^\//, ''); }
-            catch { imgSrc = imgEl.getAttribute('src') || ''; }
-          }
-
-          const p = new URLSearchParams({
-            name:     this.dataset.name  || '',
-            price:    priceEl?.textContent.replace('$','') || this.dataset.price || '',
-            priceOld: priceOldEl?.textContent.replace('$','') || '',
-            sale:     saleEl?.textContent || '',
-            brand:    this.dataset.brand || '',
-            cat:      this.dataset.cat   || '',
-            rating:   this.dataset.rating || '',
-            img:      imgSrc,
-            stars,
-            rnum,
-          });
-          window.location.href = 'product.html?' + p.toString();
-        });
-      });
+      loadProducts();
     });
   </script>
 </body>
