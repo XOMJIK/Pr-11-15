@@ -47,45 +47,31 @@
   </div>
 
   <div class="product-layout">
-
     <div class="product-gallery">
       <div class="gallery-thumbs" id="galleryThumbs">
         <div class="gallery-thumb active" onclick="setMain(this)">
-          <span id="thumb1Emoji" style="font-size:28px">🖱️</span>
+          <span id="thumb1Emoji" style="font-size:28px">📦</span>
           <img id="thumb1Img" src="" alt="" style="display:none">
         </div>
-        <div class="gallery-thumb" onclick="setMain(this)">
-          <span style="font-size:28px">📦</span>
-        </div>
-        <div class="gallery-thumb" onclick="setMain(this)">
-          <span style="font-size:28px">🔍</span>
-        </div>
-        <div class="gallery-thumb" onclick="setMain(this)">
-          <span style="font-size:28px">⚙️</span>
-        </div>
+        <div class="gallery-thumb" onclick="setMain(this)"><span style="font-size:28px">📦</span></div>
+        <div class="gallery-thumb" onclick="setMain(this)"><span style="font-size:28px">🔍</span></div>
+        <div class="gallery-thumb" onclick="setMain(this)"><span style="font-size:28px">⚙️</span></div>
       </div>
-      <div class="gallery-main" id="galleryMain">
-      </div>
+      <div class="gallery-main" id="galleryMain"></div>
     </div>
 
     <div class="product-info">
       <h1 id="prodName">Завантаження...</h1>
-
       <div class="product-rating-row">
         <span class="product-stars" id="prodStars">★★★★★</span>
-        <span class="product-votes" id="prodVotes">4.9/5 (2,341 відгук)</span>
+        <span class="product-votes" id="prodVotes">—</span>
       </div>
-
       <div class="product-price-row">
         <span class="product-price-main" id="prodPrice">—</span>
         <span class="product-price-old" id="prodPriceOld" style="display:none"></span>
         <span class="product-badge-sale" id="prodSale" style="display:none"></span>
       </div>
-
-      <p class="product-desc" id="prodDesc">
-        Преміальний товар від провідного бренду. Розроблений для максимальної продуктивності та комфорту під час тривалих ігрових сесій.
-      </p>
-
+      <p class="product-desc" id="prodDesc">Преміальний товар від провідного бренду.</p>
       <div>
         <div class="product-option-title">Колір: <span id="chosenColor">Чорний</span></div>
         <div class="color-options">
@@ -94,7 +80,6 @@
           <div class="color-dot" style="background:#22c55e" title="Зелений" onclick="pickColor(this,'Зелений')"></div>
         </div>
       </div>
-
       <div class="product-actions">
         <div class="qty-control">
           <button class="qty-btn" onclick="changeQty(-1)">−</button>
@@ -103,84 +88,55 @@
         </div>
         <button class="btn-add-to-cart" onclick="addToCart()">Додати до кошика</button>
       </div>
-
-      <div class="product-specs" id="prodSpecs">
-      </div>
+      <div class="product-specs" id="prodSpecs"></div>
     </div>
   </div>
 
   <div class="product-tabs-section">
     <div class="tabs-nav">
       <button class="tab-btn active" onclick="openTab(event,'details')">Опис товару</button>
-      <button class="tab-btn" onclick="openTab(event,'reviews')">Відгуки (2,341)</button>
+      <button class="tab-btn" onclick="openTab(event,'reviews')">Відгуки</button>
       <button class="tab-btn" onclick="openTab(event,'faq')">FAQ</button>
     </div>
-
     <div id="details" class="tab-content active">
-      <p id="prodFullDesc" style="font-size:15px;color:var(--gray-mid);line-height:1.8;max-width:720px">
-        Завантаження опису...
-      </p>
+      <p id="prodFullDesc" style="font-size:15px;color:var(--gray-mid);line-height:1.8;max-width:720px">Завантаження...</p>
     </div>
-
     <div id="reviews" class="tab-content">
       <div class="reviews-grid">
         <div class="review-card">
-          <div class="review-header">
-            <div class="review-name">Дмитро К. <span style="color:var(--green)">✓</span></div>
-            <div class="review-date">12 серпня 2025</div>
-          </div>
+          <div class="review-header"><div class="review-name">Дмитро К. <span style="color:var(--green)">✓</span></div><div class="review-date">12 серпня 2025</div></div>
           <div class="review-stars">★★★★★</div>
           <p class="review-text">"Найкращий товар який я купував. Якість на вищому рівні, доставка швидка. Gear.co — тепер мій основний магазин!"</p>
         </div>
         <div class="review-card">
-          <div class="review-header">
-            <div class="review-name">Олена М. <span style="color:var(--green)">✓</span></div>
-            <div class="review-date">3 вересня 2025</div>
-          </div>
+          <div class="review-header"><div class="review-name">Олена М. <span style="color:var(--green)">✓</span></div><div class="review-date">3 вересня 2025</div></div>
           <div class="review-stars">★★★★★</div>
           <p class="review-text">"Відмінна якість збірки. Рука не втомлюється навіть після 6+ годин роботи. Дуже задоволена покупкою!"</p>
         </div>
         <div class="review-card">
-          <div class="review-header">
-            <div class="review-name">Іван С. <span style="color:var(--green)">✓</span></div>
-            <div class="review-date">20 жовтня 2025</div>
-          </div>
+          <div class="review-header"><div class="review-name">Іван С. <span style="color:var(--green)">✓</span></div><div class="review-date">20 жовтня 2025</div></div>
           <div class="review-stars">★★★★☆</div>
           <p class="review-text">"Дуже хороший товар. Все відповідає опису. Упаковка ідеальна. Рекомендую і товар, і магазин!"</p>
         </div>
         <div class="review-card">
-          <div class="review-header">
-            <div class="review-name">Максим Р. <span style="color:var(--green)">✓</span></div>
-            <div class="review-date">5 листопада 2025</div>
-          </div>
+          <div class="review-header"><div class="review-name">Максим Р. <span style="color:var(--green)">✓</span></div><div class="review-date">5 листопада 2025</div></div>
           <div class="review-stars">★★★★★</div>
           <p class="review-text">"Купив у Gear.co — доставка за день, упаковка відмінна. Дуже задоволений якістю. Рекомендую всім!"</p>
         </div>
       </div>
     </div>
-
     <div id="faq" class="tab-content">
       <div style="max-width:600px;display:flex;flex-direction:column;gap:20px">
-        <div>
-          <p style="font-weight:700;margin-bottom:6px">Яка гарантія на товар?</p>
-          <p style="color:var(--gray-mid);font-size:14px;line-height:1.7">Офіційна гарантія виробника — 2 роки. Gear.co надає додатково 30 днів на повернення без питань.</p>
-        </div>
-        <div>
-          <p style="font-weight:700;margin-bottom:6px">Чи є доставка по Україні?</p>
-          <p style="color:var(--gray-mid);font-size:14px;line-height:1.7">Так! Доставляємо Новою Поштою та УкрПоштою по всій Україні. При замовленні від $100 — доставка безкоштовна.</p>
-        </div>
-        <div>
-          <p style="font-weight:700;margin-bottom:6px">Як повернути товар?</p>
-          <p style="color:var(--gray-mid);font-size:14px;line-height:1.7">Протягом 30 днів після покупки можна повернути товар у повній комплектації. Зв'яжіться з підтримкою — допоможемо.</p>
-        </div>
+        <div><p style="font-weight:700;margin-bottom:6px">Яка гарантія на товар?</p><p style="color:var(--gray-mid);font-size:14px;line-height:1.7">Офіційна гарантія виробника — 2 роки. Gear.co надає додатково 30 днів на повернення без питань.</p></div>
+        <div><p style="font-weight:700;margin-bottom:6px">Чи є доставка по Україні?</p><p style="color:var(--gray-mid);font-size:14px;line-height:1.7">Так! Доставляємо Новою Поштою та УкрПоштою по всій Україні. При замовленні від $100 — доставка безкоштовна.</p></div>
+        <div><p style="font-weight:700;margin-bottom:6px">Як повернути товар?</p><p style="color:var(--gray-mid);font-size:14px;line-height:1.7">Протягом 30 днів після покупки можна повернути товар у повній комплектації. Зв'яжіться з підтримкою — допоможемо.</p></div>
       </div>
     </div>
   </div>
 
   <div class="related-section">
     <h2 class="section-title">Вам також може сподобатись</h2>
-    <div class="products-grid" id="relatedGrid">
-    </div>
+    <div class="products-grid" id="relatedGrid"></div>
   </div>
 
   <footer>
@@ -209,194 +165,31 @@
     </div>
   </footer>
 
+  <script src="js/main.js"></script>
   <script>
-    const PRODUCT_DATA = {
-      'Razer DeathAdder V3': {
-        emoji: '🖱️',
-        desc: 'Razer DeathAdder V3 — ультралегка ергономічна мишка з оптичним сенсором Focus Pro 30K. Вага лише 59г та нова форма корпусу забезпечують неперевершений контроль у будь-яких іграх.',
-        specs: [['Сенсор','Razer Focus Pro 30K'],['DPI','100–30 000'],['Кнопки','5 програмованих'],['Підключення','Дротова USB-A'],['Вага','59 г'],['Гарантія','2 роки']],
-      },
-      'Logitech G502 X Plus': {
-        emoji: '🖱️',
-        desc: 'Logitech G502 X Plus — бездротова мишка-легенда з сенсором HERO 25K та унікальним дизайном з налаштовуваними ваговими елементами.',
-        specs: [['Сенсор','HERO 25K'],['DPI','100–25 600'],['Кнопки','13 програмованих'],['Підключення','LIGHTSPEED бездротова'],['Вага','89–114 г'],['Гарантія','2 роки']],
-      },
-      'Zowie EC2-CW': {
-        emoji: '🖱️',
-        desc: 'Zowie EC2-CW — бездротова ергономічна мишка для кіберспортсменів без програмного забезпечення. Plug-and-play рішення з сенсором 3360.',
-        specs: [['Сенсор','PixArt 3360'],['DPI','400–3 200'],['Кнопки','5'],['Підключення','2.4GHz бездротова'],['Вага','77 г'],['Гарантія','2 роки']],
-      },
-      'Razer Viper V3 Pro': {
-        emoji: '🖱️',
-        desc: 'Razer Viper V3 Pro — найлегша бездротова мишка Razer. Сенсор Focus Pro 35K та зарядний чохол у комплекті.',
-        specs: [['Сенсор','Razer Focus Pro 35K'],['DPI','100–35 000'],['Кнопки','5 програмованих'],['Підключення','HyperSpeed бездротова'],['Вага','82 г'],['Гарантія','2 роки']],
-      },
-      'HyperX Pulsefire Haste 2': {
-        emoji: '🖱️',
-        desc: 'HyperX Pulsefire Haste 2 — легка ігрова мишка з honeycomb-дизайном. Сенсор HyperX 26K Precision забезпечує точне відстеження.',
-        specs: [['Сенсор','HyperX 26K Precision'],['DPI','100–26 000'],['Кнопки','6 програмованих'],['Підключення','Дротова USB-C'],['Вага','53 г'],['Гарантія','2 роки']],
-      },
-      'Logitech G Pro X TKL': {
-        emoji: '⌨️',
-        desc: 'Logitech G Pro X TKL — компактна клавіатура для кіберспортсменів з власними перемикачами GX та алюмінієвим корпусом.',
-        specs: [['Форм-фактор','TKL (80%)'],['Перемикачі','Logitech GX (на вибір)'],['Підсвітка','RGB LIGHTSYNC'],['Підключення','Дротова USB'],['Корпус','Алюміній'],['Гарантія','2 роки']],
-      },
-      'Corsair K70 RGB Pro': {
-        emoji: '⌨️',
-        desc: 'Corsair K70 RGB Pro — легендарна механічна клавіатура з алюмінієвою рамою, перемикачами Cherry MX та програмованими макросами.',
-        specs: [['Форм-фактор','Full-size'],['Перемикачі','Cherry MX (на вибір)'],['Підсвітка','RGB per-key'],['Підключення','Дротова USB'],['Корпус','Алюміній'],['Гарантія','2 роки']],
-      },
-      'Razer BlackWidow V4 Pro': {
-        emoji: '⌨️',
-        desc: 'Razer BlackWidow V4 Pro — флагманська бездротова механічна клавіатура з перемикачами Green V3 та мультимедійним диском.',
-        specs: [['Форм-фактор','Full-size'],['Перемикачі','Razer Green V3'],['Підсвітка','Razer Chroma RGB'],['Підключення','Бездротова + дротова'],['Акумулятор','200 год'],['Гарантія','2 роки']],
-      },
-      'HyperX Cloud III': {
-        emoji: '🎧',
-        desc: 'HyperX Cloud III — найкомфортніші ігрові навушники з 53мм драйверами та покращеною просторовою звуком DTS Headphone:X.',
-        specs: [['Драйвери','53мм динамічні'],['Частота','10–21 000 Гц'],['Мікрофон','Знімний, шумопоглинання'],['Підключення','3.5мм / USB-C'],['Вага','320 г'],['Гарантія','2 роки']],
-      },
-      'SteelSeries Arctis Nova 7': {
-        emoji: '🎧',
-        desc: 'SteelSeries Arctis Nova 7 — бездротові навушники з одночасним підключенням до двох пристроїв та 38 годинами автономної роботи.',
-        specs: [['Драйвери','40мм Neodymium'],['Автономність','38 годин'],['Мікрофон','ClearCast AI'],['Підключення','2.4GHz + Bluetooth'],['Вага','373 г'],['Гарантія','1 рік']],
-      },
-      'Samsung Odyssey G5 27': {
-        emoji: '🖥️',
-        desc: 'Samsung Odyssey G5 27" — вигнутий (1000R) ігровий монітор з роздільністю QHD та частотою 165Гц для плавної гри.',
-        specs: [['Розмір','27 дюймів'],['Роздільність','2560×1440 QHD'],['Частота','165 Гц'],['Вигин','1000R'],['Час відгуку','1 мс'],['Гарантія','3 роки']],
-      },
-      'SteelSeries QcK XXL': {
-        emoji: '🖱️',
-        desc: 'SteelSeries QcK XXL — найпопулярніший ігровий килимок у світі. Покриває весь стіл, забезпечуючи максимальний простір для руху.',
-        specs: [['Розмір','900×400×2 мм'],['Поверхня','Мікротекстурована тканина'],['Основа','Натуральна гума'],['Краї','Прошиті'],['Колір','Чорний'],['Гарантія','1 рік']],
-      },
-    };
-
-    const RELATED = [
-      { name:'Razer DeathAdder V3', emoji:'🖱️', price:'$89', cat:'Миші', brand:'Razer', rating:'4.9', img:'images/mouse1.png' },
-      { name:'Logitech G502 X Plus', emoji:'🖱️', price:'$159', priceOld:'$199', sale:'-20%', cat:'Миші', brand:'Logitech', rating:'5.0', img:'images/mouse2.png' },
-      { name:'Corsair K70 RGB Pro', emoji:'⌨️', price:'$139', cat:'Клавіатури', brand:'Corsair', rating:'4.5', img:'images/keyboard2.png' },
-      { name:'HyperX Cloud III', emoji:'🎧', price:'$99', cat:'Навушники', brand:'HyperX', rating:'4.8', img:'images/headset1.png' },
-    ];
-
-    window.addEventListener('DOMContentLoaded', () => {
-      const p = new URLSearchParams(window.location.search);
-
-      const name     = p.get('name')     || 'Razer DeathAdder V3';
-      const price    = p.get('price')    || '89';
-      const priceOld = p.get('priceOld') || '';
-      const sale     = p.get('sale')     || '';
-      const brand    = p.get('brand')    || 'Razer';
-      const cat      = p.get('cat')      || 'Миші';
-      const stars    = p.get('stars')    || '★★★★★';
-      const rnum     = p.get('rnum')     || '4.9/5';
-      const imgSrc   = p.get('img')      || '';
-
-      document.title = name + ' — GEAR.CO';
-
-      document.getElementById('breadCat').textContent  = cat;
-      document.getElementById('breadCat').href         = `category.html?cat=${encodeURIComponent(cat)}`;
-      document.getElementById('breadName').textContent = name;
-
-      document.getElementById('prodName').textContent  = name;
-
-      document.getElementById('prodStars').textContent = stars;
-      document.getElementById('prodVotes').textContent = rnum;
-
-      document.getElementById('prodPrice').textContent = '$' + price;
-      if (priceOld) {
-        document.getElementById('prodPriceOld').textContent = '$' + priceOld;
-        document.getElementById('prodPriceOld').style.display = '';
-      }
-      if (sale) {
-        document.getElementById('prodSale').textContent = sale;
-        document.getElementById('prodSale').style.display = '';
-      }
-
-      const data = PRODUCT_DATA[name] || null;
-      const emoji = data?.emoji || getCatEmoji(cat);
-
-      const main = document.getElementById('galleryMain');
-      if (imgSrc) {
-        main.innerHTML = `<img src="${imgSrc}" alt="${name}" style="width:100%;height:100%;object-fit:cover"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-          <span style="font-size:140px;display:none">${emoji}</span>`;
-      } else {
-        main.innerHTML = `<span style="font-size:140px">${emoji}</span>`;
-      }
-
-      const t1 = document.getElementById('thumb1Img');
-      const t1e = document.getElementById('thumb1Emoji');
-      if (imgSrc) {
-        t1.src = imgSrc;
-        t1.style.display = '';
-        t1e.style.display = 'none';
-        t1.onerror = () => { t1.style.display='none'; t1e.style.display=''; };
-      } else {
-        t1e.textContent = emoji;
-      }
-
-      if (data) {
-        document.getElementById('prodDesc').textContent     = data.desc;
-        document.getElementById('prodFullDesc').textContent = data.desc;
-      } else {
-        const fallback = `${name} від бренду ${brand} — якісний товар категорії "${cat}" для геймерів та професіоналів.`;
-        document.getElementById('prodDesc').textContent     = fallback;
-        document.getElementById('prodFullDesc').textContent = fallback;
-      }
-
-      const specs = data?.specs || [
-        ['Бренд', brand],
-        ['Категорія', cat],
-        ['Підключення', p.get('conn') || '—'],
-        ['Гарантія', '2 роки'],
-      ];
-      document.getElementById('prodSpecs').innerHTML = specs
-        .map(([label, val]) => `<div class="spec-row"><span class="spec-label">${label}</span><span class="spec-value">${val}</span></div>`)
-        .join('');
-
-      const related = RELATED.filter(r => r.name !== name).slice(0, 4);
-      document.getElementById('relatedGrid').innerHTML = related.map(r => `
-        <a href="product.html?name=${encodeURIComponent(r.name)}&price=${r.price.replace('$','')}&brand=${r.brand}&cat=${r.cat}&rating=${r.rating}&stars=★★★★★&rnum=${r.rating}/5&img=${encodeURIComponent(r.img||'')}" class="product-card">
-          <div class="product-img-wrap">
-            ${r.img
-              ? `<img src="${r.img}" alt="${r.name}" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="product-placeholder" style="display:none">${r.emoji}</div>`
-              : `<div class="product-placeholder">${r.emoji}</div>`}
-          </div>
-          <div class="product-name">${r.name}</div>
-          <div class="product-rating"><span class="stars">★★★★★</span><span class="rating-num">${r.rating}/5</span></div>
-          <div class="product-price">
-            <span class="price">${r.price}</span>
-            ${r.priceOld ? `<span class="price-old">$${r.priceOld}</span>` : ''}
-            ${r.sale     ? `<span class="badge-sale">${r.sale}</span>`     : ''}
-          </div>
-        </a>`).join('');
-    });
-
     function getCatEmoji(cat) {
       const map = { 'Миші':'🖱️','Клавіатури':'⌨️','Навушники':'🎧','Монітори':'🖥️','Килимки':'🖱️' };
       return map[cat] || '📦';
     }
-
+    function getStars(rating) {
+      const full = Math.round(parseFloat(rating));
+      return '★'.repeat(full) + '☆'.repeat(5 - full);
+    }
     function changeQty(delta) {
       const el = document.getElementById('qty');
       let val = parseInt(el.textContent) + delta;
       if (val < 1) val = 1;
       el.textContent = val;
     }
-
     function pickColor(el, name) {
       document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
       el.classList.add('active');
       document.getElementById('chosenColor').textContent = name;
     }
-
     function setMain(thumb) {
       document.querySelectorAll('.gallery-thumb').forEach(t => t.classList.remove('active'));
       thumb.classList.add('active');
     }
-
     function openTab(e, id) {
       document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -404,63 +197,153 @@
       e.target.classList.add('active');
     }
 
+    function renderProduct(prod) {
+      const emoji = getCatEmoji(prod.category_name);
+      document.title = prod.name + ' — GEAR.CO';
+      document.getElementById('breadCat').textContent = prod.category_name || 'Каталог';
+      document.getElementById('breadCat').href        = `category.html?cat=${encodeURIComponent(prod.category_name||'')}`;
+      document.getElementById('breadName').textContent = prod.name;
+      document.getElementById('prodName').textContent  = prod.name;
+      document.getElementById('prodStars').textContent = getStars(prod.rating);
+      document.getElementById('prodVotes').textContent = prod.rating + '/5';
+      document.getElementById('prodPrice').textContent = '$' + prod.price;
+
+      if (prod.price_old) {
+        const pct = Math.round((1 - prod.price / prod.price_old) * 100);
+        document.getElementById('prodPriceOld').textContent = '$' + prod.price_old;
+        document.getElementById('prodPriceOld').style.display = '';
+        document.getElementById('prodSale').textContent = '-' + pct + '%';
+        document.getElementById('prodSale').style.display = '';
+      }
+
+      const desc = `${prod.name} від бренду ${prod.brand_name} — якісний товар категорії "${prod.category_name}" для геймерів та професіоналів.`;
+      document.getElementById('prodDesc').textContent     = desc;
+      document.getElementById('prodFullDesc').textContent = desc;
+
+      const main = document.getElementById('galleryMain');
+      if (prod.image) {
+        main.innerHTML = `<img src="${prod.image}" alt="${prod.name}" style="width:100%;height:100%;object-fit:contain"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <span style="font-size:140px;display:none">${emoji}</span>`;
+        const t1 = document.getElementById('thumb1Img');
+        const t1e = document.getElementById('thumb1Emoji');
+        t1.src = prod.image; t1.style.display = ''; t1e.style.display = 'none';
+        t1.onerror = () => { t1.style.display='none'; t1e.style.display=''; t1e.textContent=emoji; };
+      } else {
+        main.innerHTML = `<span style="font-size:140px">${emoji}</span>`;
+        document.getElementById('thumb1Emoji').textContent = emoji;
+      }
+
+      document.getElementById('prodSpecs').innerHTML = [
+        ['Бренд',      prod.brand_name    || '—'],
+        ['Категорія',  prod.category_name || '—'],
+        ['Рейтинг',    prod.rating + '/5'],
+        ['В наявності', prod.stock > 0 ? prod.stock + ' шт.' : 'Немає в наявності'],
+        ['Гарантія',   '2 роки'],
+      ].map(([l, v]) => `<div class="spec-row"><span class="spec-label">${l}</span><span class="spec-value">${v}</span></div>`).join('');
+    }
+
+    async function loadRelated(currentId, categoryName) {
+      try {
+        const res  = await fetch('/api/products');
+        const data = await res.json();
+        const all  = data.data || [];
+        const same = all.filter(p => p.id !== currentId && p.category_name === categoryName).slice(0, 4);
+        const diff = all.filter(p => p.id !== currentId && p.category_name !== categoryName).slice(0, 4 - same.length);
+        const related = [...same, ...diff].slice(0, 4);
+
+        document.getElementById('relatedGrid').innerHTML = related.map(p => {
+          const sp = p.price_old ? Math.round((1 - p.price / p.price_old) * 100) : null;
+          return `
+            <a href="product.html?id=${p.id}&name=${encodeURIComponent(p.name)}&price=${p.price}${p.price_old?'&priceOld='+p.price_old:''}&brand=${encodeURIComponent(p.brand_name||'')}&cat=${encodeURIComponent(p.category_name||'')}&img=${encodeURIComponent(p.image||'')}&rating=${p.rating}"
+               class="product-card">
+              <div class="product-img-wrap">
+                ${p.image
+                  ? `<img src="${p.image}" alt="${p.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="product-placeholder" style="display:none">${getCatEmoji(p.category_name)}</div>`
+                  : `<div class="product-placeholder">${getCatEmoji(p.category_name)}</div>`}
+              </div>
+              <div class="product-name">${p.name}</div>
+              <div class="product-rating"><span class="stars">${getStars(p.rating)}</span><span class="rating-num">${p.rating}/5</span></div>
+              <div class="product-price">
+                <span class="price">$${p.price}</span>
+                ${p.price_old ? `<span class="price-old">$${p.price_old}</span>` : ''}
+                ${sp ? `<span class="badge-sale">-${sp}%</span>` : ''}
+              </div>
+            </a>`;
+        }).join('');
+      } catch(e) { console.error(e); }
+    }
+
+    async function loadProduct() {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+
+      if (id) {
+        try {
+          const res  = await fetch('/api/products/' + id);
+          const data = await res.json();
+          if (res.ok && data.data) {
+            renderProduct(data.data);
+            loadRelated(data.data.id, data.data.category_name);
+            return;
+          }
+        } catch(e) { console.error(e); }
+      }
+
+      // Fallback з URL
+      renderProduct({
+        id: null,
+        name:          params.get('name')     || 'Товар',
+        price:         params.get('price')    || '0',
+        price_old:     params.get('priceOld') || null,
+        brand_name:    params.get('brand')    || '—',
+        category_name: params.get('cat')      || 'Каталог',
+        rating:        params.get('rating')   || '5.0',
+        image:         params.get('img')      || '',
+        stock:         0,
+      });
+    }
+
     async function addToCart() {
-  const token = localStorage.getItem('token');
+      const token = localStorage.getItem('token');
+      if (!token) {
+        if (confirm('Щоб додати товар до кошика потрібно увійти. Перейти до входу?')) {
+          window.location.href = 'login.html';
+        }
+        return;
+      }
 
-  if (!token) {
-    if (confirm('Щоб додати товар до кошика потрібно увійти. Перейти до входу?')) {
-      window.location.href = 'login.html';
+      const productId = new URLSearchParams(window.location.search).get('id');
+      if (!productId) {
+        alert('Цей товар не підключений до бази даних');
+        return;
+      }
+
+      const qty = parseInt(document.getElementById('qty').textContent);
+      try {
+        const res  = await fetch('/api/cart', {
+          method: 'POST',
+          headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ product_id: parseInt(productId), quantity: qty }),
+        });
+        const data = await res.json();
+        if (!res.ok) { alert('Помилка: ' + data.message); return; }
+
+        const countEl = document.getElementById('cartCount');
+        if (countEl) countEl.textContent = parseInt(countEl.textContent || 0) + qty;
+
+        const btn = document.querySelector('.btn-add-to-cart');
+        const orig = btn.textContent;
+        btn.textContent = '✓ Додано до кошика!';
+        btn.style.background = '#22c55e';
+        btn.style.color = '#000';
+        setTimeout(() => { btn.textContent = orig; btn.style.background = ''; btn.style.color = ''; }, 2000);
+      } catch(e) {
+        alert('Помилка сервера. Спробуй ще раз.');
+      }
     }
-    return;
-  }
 
-  const name     = document.getElementById('prodName').textContent;
-  const qty      = parseInt(document.getElementById('qty').textContent);
-  const p        = new URLSearchParams(window.location.search);
-  const productId = p.get('id');
-
-  if (!productId) {
-    alert('Помилка: товар не знайдено в базі даних');
-    return;
-  }
-
-  try {
-    const res = await fetch('/api/cart', {
-      method: 'POST',
-      headers: {
-        'Authorization': 'Bearer ' + token,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ product_id: parseInt(productId), quantity: qty }),
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      alert('Помилка: ' + data.message);
-      return;
-    }
-
-    // Оновити лічильник
-    const countEl = document.getElementById('cartCount');
-    if (countEl) countEl.textContent = parseInt(countEl.textContent || 0) + qty;
-
-    // Показати повідомлення
-    const btn = document.querySelector('.btn-add-to-cart');
-    const original = btn.textContent;
-    btn.textContent = '✓ Додано до кошика!';
-    btn.style.background = '#22c55e';
-    btn.style.color = '#000';
-    setTimeout(() => {
-      btn.textContent = original;
-      btn.style.background = '';
-      btn.style.color = '';
-    }, 2000);
-
-  } catch (err) {
-    alert('Помилка сервера. Спробуй ще раз.');
-  }
-}
+    loadProduct();
   </script>
 </body>
 </html>

@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/mobile.css">
 </head>
 <body>
 
@@ -126,26 +127,27 @@
     </div>
   </footer>
 
+  <script src="js/main.js"></script>
   <script>
     function checkStrength() {
-      const val = document.getElementById('password').value;
-      const bar = document.getElementById('strengthBar');
-      const fill = document.getElementById('strengthFill');
+      const val   = document.getElementById('password').value;
+      const bar   = document.getElementById('strengthBar');
+      const fill  = document.getElementById('strengthFill');
       const label = document.getElementById('strengthLabel');
 
       if (!val) { bar.style.display = 'none'; return; }
       bar.style.display = 'block';
 
       let score = 0;
-      if (val.length >= 8)  score++;
-      if (/[A-Z]/.test(val)) score++;
-      if (/[0-9]/.test(val)) score++;
-      if (/[^A-Za-z0-9]/.test(val)) score++;
+      if (val.length >= 8)           score++;
+      if (/[A-Z]/.test(val))         score++;
+      if (/[0-9]/.test(val))         score++;
+      if (/[^A-Za-z0-9]/.test(val))  score++;
 
       const levels = [
-        { pct: '25%', bg: '#ef4444', text: 'Слабкий' },
-        { pct: '50%', bg: '#f97316', text: 'Середній' },
-        { pct: '75%', bg: '#eab308', text: 'Добрий' },
+        { pct: '25%',  bg: '#ef4444', text: 'Слабкий'  },
+        { pct: '50%',  bg: '#f97316', text: 'Середній' },
+        { pct: '75%',  bg: '#eab308', text: 'Добрий'   },
         { pct: '100%', bg: '#22c55e', text: 'Надійний' },
       ];
       const lvl = levels[score - 1] || levels[0];
@@ -156,79 +158,72 @@
     }
 
     async function register() {
-  ['firstName','lastName','email','phone','password','confirmPassword'].forEach(id => {
-    document.getElementById(id).classList.remove('error');
-  });
-  document.querySelectorAll('.form-error').forEach(e => e.classList.remove('show'));
+      ['firstName','lastName','email','phone','password','confirmPassword'].forEach(id => {
+        document.getElementById(id).classList.remove('error');
+      });
+      document.querySelectorAll('.form-error').forEach(e => e.classList.remove('show'));
 
-  const firstName = document.getElementById('firstName').value.trim();
-  const lastName  = document.getElementById('lastName').value.trim();
-  const email     = document.getElementById('email').value.trim();
-  const phone     = document.getElementById('phone').value.trim();
-  const password  = document.getElementById('password').value;
-  const confirm   = document.getElementById('confirmPassword').value;
-  const terms     = document.getElementById('terms').checked;
-  let valid = true;
+      const firstName = document.getElementById('firstName').value.trim();
+      const lastName  = document.getElementById('lastName').value.trim();
+      const email     = document.getElementById('email').value.trim();
+      const phone     = document.getElementById('phone').value.trim();
+      const password  = document.getElementById('password').value;
+      const confirm   = document.getElementById('confirmPassword').value;
+      const terms     = document.getElementById('terms').checked;
+      let valid = true;
 
-  function err(fieldId, errId) {
-    document.getElementById(fieldId).classList.add('error');
-    document.getElementById(errId).classList.add('show');
-    valid = false;
-  }
+      function err(fieldId, errId) {
+        document.getElementById(fieldId).classList.add('error');
+        document.getElementById(errId).classList.add('show');
+        valid = false;
+      }
 
-  if (!firstName) err('firstName', 'firstNameErr');
-  if (!lastName)  err('lastName',  'lastNameErr');
+      if (!firstName) err('firstName', 'firstNameErr');
+      if (!lastName)  err('lastName',  'lastNameErr');
 
-  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRe.test(email)) err('email', 'emailErr');
+      const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRe.test(email)) err('email', 'emailErr');
 
-  const phoneRe = /^\+?[\d\s\-]{10,15}$/;
-  if (!phoneRe.test(phone)) err('phone', 'phoneErr');
+      const phoneRe = /^\+?[\d\s\-]{10,15}$/;
+      if (!phoneRe.test(phone)) err('phone', 'phoneErr');
 
-  if (password.length < 8) err('password', 'passErr');
-  if (password !== confirm) err('confirmPassword', 'confirmErr');
+      if (password.length < 8) err('password', 'passErr');
+      if (password !== confirm) err('confirmPassword', 'confirmErr');
 
-  if (!terms) {
-    document.getElementById('termsErr').classList.add('show');
-    valid = false;
-  }
+      if (!terms) {
+        document.getElementById('termsErr').classList.add('show');
+        valid = false;
+      }
 
-  if (!valid) return;
+      if (!valid) return;
 
-  try {
-    const res = await fetch('/api/auth/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        first_name: firstName,
-        last_name:  lastName,
-        email,
-        phone,
-        password,
-      }),
-    });
+      try {
+        const res = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ first_name: firstName, last_name: lastName, email, phone, password }),
+        });
 
-    const data = await res.json();
+        const data = await res.json();
 
-    if (!res.ok) {
-      const emailErr = document.getElementById('emailErr');
-      emailErr.textContent = data.message || 'Помилка реєстрації';
-      emailErr.classList.add('show');
-      document.getElementById('email').classList.add('error');
-      return;
+        if (!res.ok) {
+          const emailErr = document.getElementById('emailErr');
+          emailErr.textContent = data.message || 'Помилка реєстрації';
+          emailErr.classList.add('show');
+          document.getElementById('email').classList.add('error');
+          return;
+        }
+
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
+
+        document.getElementById('successMsg').classList.add('show');
+        setTimeout(() => { window.location.href = 'index.html'; }, 1800);
+
+      } catch (e) {
+        alert('Помилка сервера. Спробуй ще раз.');
+      }
     }
-
-    // Зберігаємо токен і дані юзера
-    localStorage.setItem('token', data.token);
-    localStorage.setItem('user', JSON.stringify(data.user));
-
-    document.getElementById('successMsg').classList.add('show');
-    setTimeout(() => { window.location.href = 'index.html'; }, 1800);
-
-  } catch (err) {
-    alert('Помилка сервера. Спробуй ще раз.');
-  }
-}
   </script>
 </body>
 </html>

@@ -98,6 +98,7 @@
 .product-img-wrap {
   background: var(--gray-light);
   border-radius: 20px;
+  position: relative;
   overflow: hidden;
   aspect-ratio: 3 / 4;
   margin-bottom: 12px;

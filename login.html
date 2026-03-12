@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/mobile.css">
 </head>
 <body>
 
@@ -90,62 +91,66 @@
     </div>
   </footer>
 
+  <script src="js/main.js"></script>
   <script>
     async function login() {
-  const email    = document.getElementById('email');
-  const password = document.getElementById('password');
-  const emailErr = document.getElementById('emailErr');
-  const passErr  = document.getElementById('passErr');
-  let valid = true;
+      const email    = document.getElementById('email');
+      const password = document.getElementById('password');
+      const emailErr = document.getElementById('emailErr');
+      const passErr  = document.getElementById('passErr');
+      let valid = true;
 
-  email.classList.remove('error');
-  password.classList.remove('error');
-  emailErr.classList.remove('show');
-  passErr.classList.remove('show');
+      email.classList.remove('error');
+      password.classList.remove('error');
+      emailErr.classList.remove('show');
+      passErr.classList.remove('show');
 
-  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRe.test(email.value.trim())) {
-    email.classList.add('error');
-    emailErr.classList.add('show');
-    valid = false;
-  }
-  if (password.value.length < 6) {
-    password.classList.add('error');
-    passErr.classList.add('show');
-    valid = false;
-  }
-  if (!valid) return;
+      const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRe.test(email.value.trim())) {
+        email.classList.add('error');
+        emailErr.classList.add('show');
+        valid = false;
+      }
+      if (password.value.length < 6) {
+        password.classList.add('error');
+        passErr.classList.add('show');
+        valid = false;
+      }
+      if (!valid) return;
 
-  try {
-    const res = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        email:    email.value.trim(),
-        password: password.value,
-      }),
-    });
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email:    email.value.trim(),
+            password: password.value,
+          }),
+        });
 
-    const data = await res.json();
+        const data = await res.json();
 
-    if (!res.ok) {
-      emailErr.textContent = data.message || 'Невірний email або пароль';
-      emailErr.classList.add('show');
-      email.classList.add('error');
-      return;
+        if (!res.ok) {
+          emailErr.textContent = data.message || 'Невірний email або пароль';
+          emailErr.classList.add('show');
+          email.classList.add('error');
+          return;
+        }
+
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('user', JSON.stringify(data.user));
+
+        document.getElementById('successMsg').classList.add('show');
+        setTimeout(() => { window.location.href = 'index.html'; }, 1500);
+
+      } catch (err) {
+        alert('Помилка сервера. Спробуй ще раз.');
+      }
     }
 
-    // Зберігаємо токен і дані юзера
-    localStorage.setItem('token', data.token);
-    localStorage.setItem('user', JSON.stringify(data.user));
-
-    document.getElementById('successMsg').classList.add('show');
-    setTimeout(() => { window.location.href = 'index.html'; }, 1500);
-
-  } catch (err) {
-    alert('Помилка сервера. Спробуй ще раз.');
-  }
-}
+    function socialLogin(provider) {
+      alert(provider + ' авторизація ще не підключена.');
+    }
   </script>
 </body>
 </html>

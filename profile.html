@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/mobile.css">
   <style>
     .profile-page { max-width: 900px; margin: 40px auto; padding: 0 20px; }
     .profile-grid { display: grid; grid-template-columns: 280px 1fr; gap: 24px; }
@@ -26,15 +27,20 @@
     .info-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
     .info-group label { font-size: 12px; color: var(--gray-mid); margin-bottom: 6px; display: block; }
     .info-value { font-size: 15px; font-weight: 500; }
-    .cart-item { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--gray-border); }
-    .cart-item-img { width: 64px; height: 64px; object-fit: contain; background: rgba(255,255,255,0.03); border-radius: 8px; padding: 8px; }
-    .cart-item-name { font-weight: 600; flex: 1; }
+    .cart-item { display: flex; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--gray-border); flex-wrap: wrap; }
+    .cart-item-img { width: 64px; height: 64px; object-fit: contain; background: rgba(255,255,255,0.03); border-radius: 8px; padding: 8px; flex-shrink: 0; }
+    .cart-item-name { font-weight: 600; flex: 1; min-width: 0; }
     .cart-item-price { font-weight: 700; color: var(--accent); }
     .cart-item-qty { display: flex; align-items: center; gap: 8px; }
     .qty-btn { width: 28px; height: 28px; border-radius: 6px; background: rgba(255,255,255,0.08); border: none; color: #fff; cursor: pointer; font-size: 16px; }
     .cart-total { text-align: right; margin-top: 20px; font-size: 18px; font-weight: 700; }
     .empty-state { text-align: center; padding: 40px; color: var(--gray-mid); font-size: 15px; }
-    @media(max-width:700px){ .profile-grid{ grid-template-columns:1fr; } .info-row{ grid-template-columns:1fr; } }
+    @media(max-width:700px) {
+      .profile-grid  { grid-template-columns: 1fr; }
+      .info-row      { grid-template-columns: 1fr; }
+      .cart-item     { gap: 12px; }
+      .cart-item-name { font-size: 14px; }
+    }
   </style>
 </head>
 <body>
@@ -61,7 +67,8 @@
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
         <span class="cart-count" id="cartCount">0</span>
       </a>
-      <a href="profile.html">
+      <!-- href="login.html" — важливо! main.js шукає саме цей атрибут -->
+      <a href="login.html">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       </a>
     </div>
@@ -70,7 +77,6 @@
   <div class="profile-page">
     <div class="profile-grid">
 
-      <!-- Бокова панель -->
       <div>
         <div class="profile-card">
           <div class="profile-avatar" id="avatarInitials">?</div>
@@ -84,10 +90,8 @@
         </div>
       </div>
 
-      <!-- Основний контент -->
       <div class="profile-card">
 
-        <!-- Мої дані -->
         <div id="tab-info" class="tab-content active">
           <div class="section-head">Мої дані</div>
           <div class="info-row">
@@ -112,7 +116,6 @@
           </div>
         </div>
 
-        <!-- Кошик -->
         <div id="tab-cart" class="tab-content">
           <div class="section-head">Мій кошик</div>
           <div id="cartItems"><div class="empty-state">Завантаження...</div></div>
@@ -134,23 +137,19 @@
     const token = localStorage.getItem('token');
     const user  = JSON.parse(localStorage.getItem('user') || 'null');
 
-    // Якщо не залогінений — редирект на логін
     if (!token || !user) {
       window.location.href = 'login.html';
+    } else {
+      document.getElementById('avatarInitials').textContent =
+        (user.first_name?.[0] || '') + (user.last_name?.[0] || '');
+      document.getElementById('profileName').textContent  = user.first_name + ' ' + user.last_name;
+      document.getElementById('profileEmail').textContent = user.email;
+      document.getElementById('infoFirstName').textContent = user.first_name;
+      document.getElementById('infoLastName').textContent  = user.last_name;
+      document.getElementById('infoEmail').textContent     = user.email;
+      document.getElementById('infoPhone').textContent     = user.phone || '—';
     }
 
-    // Заповнити дані юзера
-    document.getElementById('avatarInitials').textContent =
-      (user.first_name?.[0] || '') + (user.last_name?.[0] || '');
-    document.getElementById('profileName').textContent =
-      user.first_name + ' ' + user.last_name;
-    document.getElementById('profileEmail').textContent = user.email;
-    document.getElementById('infoFirstName').textContent = user.first_name;
-    document.getElementById('infoLastName').textContent  = user.last_name;
-    document.getElementById('infoEmail').textContent     = user.email;
-    document.getElementById('infoPhone').textContent     = user.phone || '—';
-
-    // Показати вкладку
     function showTab(name, el) {
       document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('.profile-menu-item').forEach(m => m.classList.remove('active'));
@@ -159,23 +158,18 @@
       if (name === 'cart') loadCart();
     }
 
-    // Завантажити кошик з API
     async function loadCart() {
       try {
-        const res = await fetch('/api/cart', {
-          headers: { 'Authorization': 'Bearer ' + token }
-        });
+        const res  = await fetch('/api/cart', { headers: { 'Authorization': 'Bearer ' + token } });
         const data = await res.json();
 
         if (!res.ok) {
-          document.getElementById('cartItems').innerHTML =
-            '<div class="empty-state">Помилка завантаження кошика</div>';
+          document.getElementById('cartItems').innerHTML = '<div class="empty-state">Помилка завантаження</div>';
           return;
         }
 
-        if (data.data.length === 0) {
-          document.getElementById('cartItems').innerHTML =
-            '<div class="empty-state">🛒 Кошик порожній</div>';
+        if (!data.data.length) {
+          document.getElementById('cartItems').innerHTML = '<div class="empty-state">🛒 Кошик порожній</div>';
           document.getElementById('cartTotal').textContent = '';
           return;
         }
@@ -195,32 +189,25 @@
           </div>
         `).join('');
 
-        document.getElementById('cartTotal').textContent =
-          'Разом: $' + data.total.toFixed(2);
-
+        const total = data.data.reduce((s, i) => s + i.price * i.quantity, 0);
+        document.getElementById('cartTotal').textContent = 'Разом: $' + total.toFixed(2);
         document.getElementById('cartCount').textContent = data.data.length;
 
       } catch (err) {
-        document.getElementById('cartItems').innerHTML =
-          '<div class="empty-state">Помилка сервера</div>';
+        document.getElementById('cartItems').innerHTML = '<div class="empty-state">Помилка сервера</div>';
       }
     }
 
-    // Змінити кількість
     async function changeQty(id, qty) {
       if (qty < 1) { removeItem(id); return; }
       await fetch('/api/cart/' + id, {
         method: 'PATCH',
-        headers: {
-          'Authorization': 'Bearer ' + token,
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
         body: JSON.stringify({ quantity: qty })
       });
       loadCart();
     }
 
-    // Видалити товар
     async function removeItem(id) {
       await fetch('/api/cart/' + id, {
         method: 'DELETE',
@@ -229,7 +216,6 @@
       loadCart();
     }
 
-    // Вийти
     function logout() {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
