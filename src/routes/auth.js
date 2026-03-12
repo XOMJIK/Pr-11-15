@@ -6,7 +6,6 @@ const { z } = require('zod');
 const pool = require('../db');
 const { AppError } = require('../middleware/errorHandler');
 
-// Схеми валідації
 const registerSchema = z.object({
   first_name: z.string().min(2, 'Імʼя мінімум 2 символи'),
   last_name:  z.string().min(2, 'Прізвище мінімум 2 символи'),
@@ -20,7 +19,6 @@ const loginSchema = z.object({
   password: z.string().min(1, 'Введіть пароль'),
 });
 
-// POST /auth/register
 router.post('/register', async (req, res, next) => {
   try {
     const data = registerSchema.parse(req.body);
@@ -67,7 +65,6 @@ router.post('/register', async (req, res, next) => {
   }
 });
 
-// POST /auth/login
 router.post('/login', async (req, res, next) => {
   try {
     const data = loginSchema.parse(req.body);

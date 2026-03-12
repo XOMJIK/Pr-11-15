@@ -9,6 +9,89 @@
   <link rel="stylesheet" href="css/product.css">
   <link rel="stylesheet" href="css/home.css">
   <link rel="stylesheet" href="css/mobile.css">
+  <style>
+    .review-form-wrap {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--gray-border);
+      border-radius: 16px;
+      padding: 28px;
+      margin-bottom: 32px;
+    }
+    .review-form-title { font-size: 18px; font-weight: 700; margin-bottom: 20px; }
+    .star-picker { display: flex; gap: 6px; margin-bottom: 16px; }
+    .star-picker span {
+      font-size: 32px;
+      cursor: pointer;
+      color: var(--gray-border);
+      transition: color 0.15s, transform 0.15s;
+      line-height: 1;
+    }
+    .star-picker span.active,
+    .star-picker span.hover { color: var(--star, #f59e0b); transform: scale(1.15); }
+    .star-picker-label { font-size: 13px; color: var(--gray-mid); margin-bottom: 12px; }
+    .review-textarea {
+      width: 100%;
+      min-height: 100px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--gray-border);
+      border-radius: 10px;
+      color: inherit;
+      font-family: inherit;
+      font-size: 14px;
+      padding: 12px 14px;
+      resize: vertical;
+      box-sizing: border-box;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .review-textarea:focus { border-color: var(--accent); }
+    .review-textarea.error { border-color: #ef4444; }
+    .review-submit {
+      margin-top: 14px;
+      padding: 12px 28px;
+      background: var(--accent);
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .review-submit:hover { opacity: 0.85; }
+    .review-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+    .review-form-msg { margin-top: 12px; font-size: 13px; font-weight: 600; }
+    .review-form-msg.success { color: #22c55e; }
+    .review-form-msg.error   { color: #ef4444; }
+
+    .reviews-list { display: flex; flex-direction: column; gap: 16px; }
+    .review-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--gray-border);
+      border-radius: 14px;
+      padding: 20px 24px;
+    }
+    .review-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; gap: 12px; flex-wrap: wrap; }
+    .review-name   { font-weight: 700; font-size: 15px; }
+    .review-date   { font-size: 12px; color: var(--gray-mid); }
+    .review-stars  { color: var(--star, #f59e0b); font-size: 16px; margin-bottom: 10px; }
+    .review-text   { font-size: 14px; color: var(--gray-mid); line-height: 1.7; }
+    .review-delete {
+      background: none; border: none; color: #ef4444;
+      font-size: 12px; cursor: pointer; padding: 0; margin-top: 8px;
+      opacity: 0.7; transition: opacity 0.2s;
+    }
+    .review-delete:hover { opacity: 1; }
+    .reviews-empty { color: var(--gray-mid); font-size: 14px; padding: 20px 0; }
+    .reviews-summary {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 24px; padding-bottom: 20px;
+      border-bottom: 1px solid var(--gray-border);
+    }
+    .reviews-avg { font-size: 48px; font-weight: 900; line-height: 1; }
+    .reviews-avg-stars { color: var(--star, #f59e0b); font-size: 22px; }
+    .reviews-count { font-size: 13px; color: var(--gray-mid); margin-top: 2px; }
+  </style>
 </head>
 <body>
 
@@ -95,36 +178,52 @@
   <div class="product-tabs-section">
     <div class="tabs-nav">
       <button class="tab-btn active" onclick="openTab(event,'details')">Опис товару</button>
-      <button class="tab-btn" onclick="openTab(event,'reviews')">Відгуки</button>
+      <button class="tab-btn" onclick="openTab(event,'reviews');loadReviews()">Відгуки <span id="reviewsTabCount"></span></button>
       <button class="tab-btn" onclick="openTab(event,'faq')">FAQ</button>
     </div>
+
     <div id="details" class="tab-content active">
       <p id="prodFullDesc" style="font-size:15px;color:var(--gray-mid);line-height:1.8;max-width:720px">Завантаження...</p>
     </div>
+
     <div id="reviews" class="tab-content">
-      <div class="reviews-grid">
-        <div class="review-card">
-          <div class="review-header"><div class="review-name">Дмитро К. <span style="color:var(--green)">✓</span></div><div class="review-date">12 серпня 2025</div></div>
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">"Найкращий товар який я купував. Якість на вищому рівні, доставка швидка. Gear.co — тепер мій основний магазин!"</p>
-        </div>
-        <div class="review-card">
-          <div class="review-header"><div class="review-name">Олена М. <span style="color:var(--green)">✓</span></div><div class="review-date">3 вересня 2025</div></div>
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">"Відмінна якість збірки. Рука не втомлюється навіть після 6+ годин роботи. Дуже задоволена покупкою!"</p>
-        </div>
-        <div class="review-card">
-          <div class="review-header"><div class="review-name">Іван С. <span style="color:var(--green)">✓</span></div><div class="review-date">20 жовтня 2025</div></div>
-          <div class="review-stars">★★★★☆</div>
-          <p class="review-text">"Дуже хороший товар. Все відповідає опису. Упаковка ідеальна. Рекомендую і товар, і магазин!"</p>
-        </div>
-        <div class="review-card">
-          <div class="review-header"><div class="review-name">Максим Р. <span style="color:var(--green)">✓</span></div><div class="review-date">5 листопада 2025</div></div>
-          <div class="review-stars">★★★★★</div>
-          <p class="review-text">"Купив у Gear.co — доставка за день, упаковка відмінна. Дуже задоволений якістю. Рекомендую всім!"</p>
+
+      <div class="reviews-summary" id="reviewsSummary" style="display:none">
+        <div>
+          <div class="reviews-avg" id="reviewsAvg">—</div>
+          <div class="reviews-avg-stars" id="reviewsAvgStars">★★★★★</div>
+          <div class="reviews-count" id="reviewsCount"></div>
         </div>
       </div>
+
+      <div class="review-form-wrap" id="reviewFormWrap">
+        <div class="review-form-title">Залишити відгук</div>
+
+        <div id="reviewLoginPrompt" style="display:none;color:var(--gray-mid);font-size:14px">
+          <a href="login.html" style="color:var(--accent);font-weight:600">Увійдіть</a>, щоб залишити відгук
+        </div>
+
+        <div id="reviewFormFields">
+          <div class="star-picker" id="starPicker">
+            <span data-val="1">★</span>
+            <span data-val="2">★</span>
+            <span data-val="3">★</span>
+            <span data-val="4">★</span>
+            <span data-val="5">★</span>
+          </div>
+          <div class="star-picker-label" id="starLabel">Оберіть оцінку</div>
+          <textarea class="review-textarea" id="reviewText" placeholder="Поділіться враженнями про товар..."></textarea>
+          <button class="review-submit" onclick="submitReview()">Надіслати відгук</button>
+          <div class="review-form-msg" id="reviewFormMsg"></div>
+        </div>
+      </div>
+
+      <div class="reviews-list" id="reviewsList">
+        <div style="color:var(--gray-mid);font-size:14px">Завантаження відгуків...</div>
+      </div>
+
     </div>
+
     <div id="faq" class="tab-content">
       <div style="max-width:600px;display:flex;flex-direction:column;gap:20px">
         <div><p style="font-weight:700;margin-bottom:6px">Яка гарантія на товар?</p><p style="color:var(--gray-mid);font-size:14px;line-height:1.7">Офіційна гарантія виробника — 2 роки. Gear.co надає додатково 30 днів на повернення без питань.</p></div>
@@ -175,6 +274,9 @@
       const full = Math.round(parseFloat(rating));
       return '★'.repeat(full) + '☆'.repeat(5 - full);
     }
+    function formatDate(str) {
+      return new Date(str).toLocaleDateString('uk-UA', { day:'numeric', month:'long', year:'numeric' });
+    }
     function changeQty(delta) {
       const el = document.getElementById('qty');
       let val = parseInt(el.textContent) + delta;
@@ -200,8 +302,8 @@
     function renderProduct(prod) {
       const emoji = getCatEmoji(prod.category_name);
       document.title = prod.name + ' — GEAR.CO';
-      document.getElementById('breadCat').textContent = prod.category_name || 'Каталог';
-      document.getElementById('breadCat').href        = `category.html?cat=${encodeURIComponent(prod.category_name||'')}`;
+      document.getElementById('breadCat').textContent  = prod.category_name || 'Каталог';
+      document.getElementById('breadCat').href         = `category.html?cat=${encodeURIComponent(prod.category_name||'')}`;
       document.getElementById('breadName').textContent = prod.name;
       document.getElementById('prodName').textContent  = prod.name;
       document.getElementById('prodStars').textContent = getStars(prod.rating);
@@ -235,12 +337,182 @@
       }
 
       document.getElementById('prodSpecs').innerHTML = [
-        ['Бренд',      prod.brand_name    || '—'],
-        ['Категорія',  prod.category_name || '—'],
-        ['Рейтинг',    prod.rating + '/5'],
+        ['Бренд',       prod.brand_name    || '—'],
+        ['Категорія',   prod.category_name || '—'],
+        ['Рейтинг',     prod.rating + '/5'],
         ['В наявності', prod.stock > 0 ? prod.stock + ' шт.' : 'Немає в наявності'],
-        ['Гарантія',   '2 роки'],
+        ['Гарантія',    '2 роки'],
       ].map(([l, v]) => `<div class="spec-row"><span class="spec-label">${l}</span><span class="spec-value">${v}</span></div>`).join('');
+    }
+
+    let selectedRating = 0;
+    let reviewsLoaded  = false;
+    const currentUser  = JSON.parse(localStorage.getItem('user') || 'null');
+    const token        = localStorage.getItem('token');
+
+    function initStarPicker() {
+      const stars = document.querySelectorAll('#starPicker span');
+      stars.forEach(star => {
+        star.addEventListener('mouseover', () => {
+          const val = parseInt(star.dataset.val);
+          stars.forEach(s => {
+            s.classList.toggle('hover', parseInt(s.dataset.val) <= val);
+            s.classList.remove('active');
+          });
+        });
+        star.addEventListener('mouseout', () => {
+          stars.forEach(s => {
+            s.classList.remove('hover');
+            s.classList.toggle('active', parseInt(s.dataset.val) <= selectedRating);
+          });
+        });
+        star.addEventListener('click', () => {
+          selectedRating = parseInt(star.dataset.val);
+          const labels = ['','Жахливо','Погано','Нормально','Добре','Відмінно'];
+          document.getElementById('starLabel').textContent = labels[selectedRating];
+          stars.forEach(s => s.classList.toggle('active', parseInt(s.dataset.val) <= selectedRating));
+        });
+      });
+
+      if (!token || !currentUser) {
+        document.getElementById('reviewFormFields').style.display = 'none';
+        document.getElementById('reviewLoginPrompt').style.display = 'block';
+      }
+    }
+
+    async function loadReviews() {
+      if (reviewsLoaded) return;
+      reviewsLoaded = true;
+
+      const productId = new URLSearchParams(window.location.search).get('id');
+      if (!productId) {
+        document.getElementById('reviewsList').innerHTML =
+          '<div class="reviews-empty">Відгуки доступні лише для товарів з бази даних</div>';
+        document.getElementById('reviewFormWrap').style.display = 'none';
+        return;
+      }
+
+      try {
+        const res  = await fetch('/api/reviews/' + productId);
+        const data = await res.json();
+        const reviews = data.data || [];
+
+        if (reviews.length > 0) {
+          const avg = (reviews.reduce((s, r) => s + r.rating, 0) / reviews.length).toFixed(1);
+          document.getElementById('reviewsAvg').textContent      = avg;
+          document.getElementById('reviewsAvgStars').textContent = getStars(avg);
+          document.getElementById('reviewsCount').textContent    = reviews.length + ' ' + countWord(reviews.length);
+          document.getElementById('reviewsSummary').style.display = 'flex';
+          document.getElementById('reviewsTabCount').textContent  = '(' + reviews.length + ')';
+        }
+
+        renderReviews(reviews);
+      } catch(e) {
+        document.getElementById('reviewsList').innerHTML =
+          '<div class="reviews-empty">Помилка завантаження відгуків</div>';
+      }
+    }
+
+    function countWord(n) {
+      if (n === 1) return 'відгук';
+      if (n >= 2 && n <= 4) return 'відгуки';
+      return 'відгуків';
+    }
+
+    function renderReviews(reviews) {
+      if (reviews.length === 0) {
+        document.getElementById('reviewsList').innerHTML =
+          '<div class="reviews-empty">Поки немає відгуків. Будьте першим!</div>';
+        return;
+      }
+
+      document.getElementById('reviewsList').innerHTML = reviews.map(r => {
+        const isOwn = currentUser && r.user_id === currentUser.id;
+        return `
+          <div class="review-card" id="review-${r.id}">
+            <div class="review-header">
+              <div class="review-name">${r.first_name} ${r.last_name[0]}. <span style="color:var(--green)">✓</span></div>
+              <div class="review-date">${formatDate(r.created_at)}</div>
+            </div>
+            <div class="review-stars">${getStars(r.rating)}</div>
+            <p class="review-text">${r.text}</p>
+            ${isOwn ? `<button class="review-delete" onclick="deleteReview(${r.id})">🗑 Видалити мій відгук</button>` : ''}
+          </div>`;
+      }).join('');
+    }
+
+    async function submitReview() {
+      const productId = new URLSearchParams(window.location.search).get('id');
+      const text = document.getElementById('reviewText').value.trim();
+      const msg  = document.getElementById('reviewFormMsg');
+      const btn  = document.querySelector('.review-submit');
+      const ta   = document.getElementById('reviewText');
+
+      msg.textContent = '';
+      msg.className   = 'review-form-msg';
+      ta.classList.remove('error');
+
+      if (!selectedRating) {
+        msg.textContent = '⚠ Оберіть оцінку';
+        msg.className   = 'review-form-msg error';
+        return;
+      }
+      if (text.length < 3) {
+        ta.classList.add('error');
+        msg.textContent = '⚠ Напишіть хоча б кілька слів';
+        msg.className   = 'review-form-msg error';
+        return;
+      }
+
+      btn.disabled    = true;
+      btn.textContent = 'Надсилання...';
+
+      try {
+        const res  = await fetch('/api/reviews/' + productId, {
+          method: 'POST',
+          headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ rating: selectedRating, text }),
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          msg.textContent = '✕ ' + (data.message || 'Помилка');
+          msg.className   = 'review-form-msg error';
+          btn.disabled    = false;
+          btn.textContent = 'Надіслати відгук';
+          return;
+        }
+
+        msg.textContent = '✓ Відгук додано!';
+        msg.className   = 'review-form-msg success';
+        document.getElementById('reviewText').value = '';
+        selectedRating = 0;
+        document.querySelectorAll('#starPicker span').forEach(s => s.classList.remove('active'));
+        document.getElementById('starLabel').textContent = 'Оберіть оцінку';
+        btn.textContent = 'Надіслати відгук';
+        btn.disabled    = false;
+        reviewsLoaded = false;
+        loadReviews();
+
+      } catch(e) {
+        msg.textContent = '✕ Помилка сервера';
+        msg.className   = 'review-form-msg error';
+        btn.disabled    = false;
+        btn.textContent = 'Надіслати відгук';
+      }
+    }
+
+    async function deleteReview(id) {
+      if (!confirm('Видалити ваш відгук?')) return;
+      try {
+        await fetch('/api/reviews/' + id, {
+          method: 'DELETE',
+          headers: { 'Authorization': 'Bearer ' + token },
+        });
+        document.getElementById('review-' + id)?.remove();
+        reviewsLoaded = false;
+        loadReviews();
+      } catch(e) { alert('Помилка видалення'); }
     }
 
     async function loadRelated(currentId, categoryName) {
@@ -285,12 +557,12 @@
           if (res.ok && data.data) {
             renderProduct(data.data);
             loadRelated(data.data.id, data.data.category_name);
+            initStarPicker();
             return;
           }
         } catch(e) { console.error(e); }
       }
 
-      // Fallback з URL
       renderProduct({
         id: null,
         name:          params.get('name')     || 'Товар',
@@ -302,6 +574,7 @@
         image:         params.get('img')      || '',
         stock:         0,
       });
+      initStarPicker();
     }
 
     async function addToCart() {
@@ -314,10 +587,7 @@
       }
 
       const productId = new URLSearchParams(window.location.search).get('id');
-      if (!productId) {
-        alert('Цей товар не підключений до бази даних');
-        return;
-      }
+      if (!productId) { alert('Цей товар не підключений до бази даних'); return; }
 
       const qty = parseInt(document.getElementById('qty').textContent);
       try {

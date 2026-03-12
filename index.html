@@ -210,7 +210,6 @@
 
     async function loadHomePage() {
       try {
-        // Новинки
         const newRes  = await fetch('/api/products/new');
         const newData = await newRes.json();
         const newProducts = (newData.data || []).slice(0, 4);
@@ -218,7 +217,6 @@
           newProducts.length ? newProducts.map(productCard).join('') :
           '<div style="grid-column:1/-1;text-align:center;padding:20px;color:var(--gray-mid)">Новинок поки немає</div>';
 
-        // Топ продажів — беремо всі і сортуємо по рейтингу
         const allRes  = await fetch('/api/products?sort=rating');
         const allData = await allRes.json();
         const topProducts = (allData.data || []).slice(0, 4);

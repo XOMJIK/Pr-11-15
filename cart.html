@@ -48,12 +48,10 @@
     <div>
       <h2 class="cart-items-title">Ваш кошик</h2>
 
-      <!-- Завантаження -->
       <div id="cartLoading" style="text-align:center;padding:40px;color:var(--gray-mid)">
         Завантаження...
       </div>
 
-      <!-- Не залогінений -->
       <div class="cart-empty" id="cartNotAuth" style="display:none">
         <div class="cart-empty-icon">🔒</div>
         <h2>Увійдіть в акаунт</h2>
@@ -61,10 +59,8 @@
         <a href="login.html"><button class="btn-primary">Увійти</button></a>
       </div>
 
-      <!-- Список товарів -->
       <div id="cartItemsList"></div>
 
-      <!-- Порожній кошик -->
       <div class="cart-empty" id="cartEmpty" style="display:none">
         <div class="cart-empty-icon">🛒</div>
         <h2>Кошик порожній</h2>
@@ -140,7 +136,6 @@
     const DISCOUNT_RATE = 0.20;
     let cartData = [];
 
-    // Ініціалізація
     document.addEventListener('DOMContentLoaded', () => {
       if (!token) {
         document.getElementById('cartLoading').style.display  = 'none';
@@ -150,7 +145,6 @@
       loadCart();
     });
 
-    // Завантажити кошик з API
     async function loadCart() {
       try {
         const res  = await fetch('/api/cart', {
@@ -174,7 +168,6 @@
       }
     }
 
-    // Відрендерити кошик
     function renderCart() {
       const list = document.getElementById('cartItemsList');
 
@@ -213,7 +206,6 @@
       recalculate();
     }
 
-    // Перерахувати суму
     function recalculate() {
       const subtotal = cartData.reduce((sum, i) => sum + parseFloat(i.price) * i.quantity, 0);
       const discount = subtotal * DISCOUNT_RATE;
@@ -226,7 +218,6 @@
       document.getElementById('cartCount').textContent  = cartData.length;
     }
 
-    // Змінити кількість
     async function changeQty(id, qty) {
       if (qty < 1) { removeItem(id); return; }
 
@@ -244,7 +235,6 @@
       renderCart();
     }
 
-    // Видалити товар
     async function removeItem(id) {
       await fetch('/api/cart/' + id, {
         method: 'DELETE',
@@ -255,7 +245,6 @@
       renderCart();
     }
 
-    // Промокод
     function applyPromo() {
       const code = document.getElementById('promoInput').value.trim().toUpperCase();
       const msg  = document.getElementById('promoMsg');
@@ -272,7 +261,6 @@
       }
     }
 
-    // Оформити замовлення
     function checkout() {
       if (cartData.length === 0) return;
       alert('Дякуємо за замовлення! 🎉\nМенеджер зв\'яжеться з вами найближчим часом.');

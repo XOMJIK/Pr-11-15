@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken');
 const pool = require('../db');
 const { AppError } = require('../middleware/errorHandler');
 
-// Middleware — перевірка токена
 const authMiddleware = (req, res, next) => {
   const token = req.headers.authorization?.split(' ')[1];
   if (!token) throw new AppError('Необхідна авторизація', 401);
@@ -17,7 +16,6 @@ const authMiddleware = (req, res, next) => {
   }
 };
 
-// GET /api/cart — отримати кошик
 router.get('/', authMiddleware, async (req, res, next) => {
   try {
     const [items] = await pool.query(`
@@ -36,7 +34,6 @@ router.get('/', authMiddleware, async (req, res, next) => {
   }
 });
 
-// POST /api/cart — додати товар
 router.post('/', authMiddleware, async (req, res, next) => {
   try {
     const { product_id, quantity = 1 } = req.body;
@@ -48,7 +45,6 @@ router.post('/', authMiddleware, async (req, res, next) => {
     );
     if (product.length === 0) throw new AppError('Товар не знайдено', 404);
 
-    // Якщо вже є — збільшуємо кількість
     const [existing] = await pool.query(
       'SELECT id, quantity FROM cart_items WHERE user_id = ? AND product_id = ?',
       [req.user.id, product_id]
@@ -72,7 +68,6 @@ router.post('/', authMiddleware, async (req, res, next) => {
   }
 });
 
-// PATCH /api/cart/:id — змінити кількість
 router.patch('/:id', authMiddleware, async (req, res, next) => {
   try {
     const { quantity } = req.body;
@@ -89,7 +84,6 @@ router.patch('/:id', authMiddleware, async (req, res, next) => {
   }
 });
 
-// DELETE /api/cart/:id — видалити товар
 router.delete('/:id', authMiddleware, async (req, res, next) => {
   try {
     await pool.query(

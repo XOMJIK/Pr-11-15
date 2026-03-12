@@ -2,8 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const header = document.querySelector('header');
   if (header) {
-
-    // Бургер додається на ВСІХ сторінках де є header
     const burger = document.createElement('button');
     burger.className = 'burger';
     burger.setAttribute('aria-label', 'Меню');
@@ -65,12 +63,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     }
-
-    // Burger видимий тільки через CSS (@media max-width: 768px)
-    // але якщо header є — він завжди в DOM
   }
 
-  // openTab — глобальна функція для вкладок
   window.openTab = function(e, id) {
     const section = e.target.closest('.product-tabs-section, .tabs-section, [data-tabs]') || document;
     section.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
@@ -80,14 +74,12 @@ document.addEventListener('DOMContentLoaded', () => {
     e.target.classList.add('active');
   };
 
-  // Активний пункт навігації
   const path = window.location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('header nav a').forEach(a => {
     const href = a.getAttribute('href')?.split('?')[0];
     if (href === path) a.classList.add('active');
   });
 
-  // Показати ім'я юзера або іконку входу
   const updateHeader = () => {
     const user = JSON.parse(localStorage.getItem('user') || 'null');
     const userLinks = document.querySelectorAll(
@@ -111,7 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Також оновити мобільне меню — замінити "Вхід" на ім'я профілю
     const mobileNav = document.querySelector('.mobile-nav');
     if (mobileNav) {
       const loginLink = mobileNav.querySelector('a[href="login.html"]');
@@ -124,7 +115,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   updateHeader();
 
-  // Лічильник кошика
   const updateCartCount = () => {
     const token = localStorage.getItem('token');
     const countEl = document.getElementById('cartCount');
@@ -146,7 +136,5 @@ document.addEventListener('DOMContentLoaded', () => {
       countEl.textContent = '0';
     });
   };
-
   updateCartCount();
-
 });

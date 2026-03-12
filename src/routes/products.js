@@ -3,7 +3,6 @@ const router = express.Router();
 const pool = require('../db');
 const { AppError } = require('../middleware/errorHandler');
 
-// GET /api/products — всі товари з фільтрами
 router.get('/', async (req, res, next) => {
   try {
     const { category, brand, search, sort, min_price, max_price } = req.query;
@@ -54,7 +53,6 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-// GET /api/products/new — новинки
 router.get('/new', async (req, res, next) => {
   try {
     const [products] = await pool.query(`
@@ -71,7 +69,6 @@ router.get('/new', async (req, res, next) => {
   }
 });
 
-// GET /api/products/:id — один товар
 router.get('/:id', async (req, res, next) => {
   try {
     const [products] = await pool.query(`
@@ -92,7 +89,6 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-// GET /api/products/category/:slug — товари по категорії
 router.get('/category/:slug', async (req, res, next) => {
   try {
     const [products] = await pool.query(`
