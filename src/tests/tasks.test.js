@@ -107,6 +107,29 @@ test('PATCH /api/tasks/:id — оновлює статус на done', async () 
   expect(res.body.data.status).toBe('done');
 });
 
+// ТЕСТИ НА ФАЙЛИ (МАЮТЬ БУТИ ДО ВИДАЛЕННЯ ЗАДАЧІ)
+test('POST /api/tasks/:id/attachments — завантажує файл', async () => {
+  const res = await request(app)
+    .post(`/api/tasks/${taskId}/attachments`)
+    .set('Authorization', `Bearer ${token}`)
+    // Міняємо на .png, щоб пройти валідацію в tasks.js
+    .attach('files', Buffer.from('test content'), 'test.png');
+
+  expect(res.statusCode).toBe(201);
+  expect(res.body.success).toBe(true);
+  expect(Array.isArray(res.body.data)).toBe(true);
+});
+
+test('GET /api/tasks/:id/attachments — повертає список файлів', async () => {
+  const res = await request(app)
+    .get(`/api/tasks/${taskId}/attachments`)
+    .set('Authorization', `Bearer ${token}`);
+
+  expect(res.statusCode).toBe(200);
+  expect(res.body.data.length).toBeGreaterThan(0);
+});
+
+// ВИДАЛЕННЯ — ЗАВЖДИ ОСТАННЄ
 test('DELETE /api/tasks/:id — видаляє задачу', async () => {
   const res = await request(app)
     .delete(`/api/tasks/${taskId}`)
